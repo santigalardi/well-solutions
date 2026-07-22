@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+
+const estado = Astro.url.searchParams.get('estado');
+const pendiente = estado === 'pendiente';
+---
+
+<Base title="¡Gracias por tu compra! · Well Solutions">
+  <section class="mx-auto max-w-2xl px-4 py-24 text-center">
+    <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-3xl">
+      {pendiente ? '⏳' : '✓'}
+    </div>
+    <h1 class="mt-6 text-3xl font-black text-slate-900">
+      {pendiente ? 'Tu pago está en proceso' : '¡Gracias por tu compra!'}
+    </h1>
+    <p class="mt-4 text-lg text-slate-600">
+      {
+        pendiente
+          ? 'En cuanto se acredite el pago, te damos de alta en el aula y recibís el acceso por email.'
+          : 'Recibimos tu pago. En breve te damos de alta en el aula online y te llega el acceso por email.'
+      }
+    </p>
+    <a
+      href="/cursos"
+      class="mt-8 inline-block rounded-xl bg-brand-600 px-8 py-4 font-semibold text-white transition hover:bg-brand-700"
+    >
+      Ver más cursos
+    </a>
+  </section>
+</Base>

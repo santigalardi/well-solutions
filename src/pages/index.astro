@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CursoCard from '../components/CursoCard.astro';
+
+const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
+  .sort((a, b) => a.data.orden - b.data.orden);
+const destacados = cursos.filter((c) => c.data.destacado).slice(0, 3);
+---
+
+<Base title="Well Solutions · Academia de Petróleo y Gas">
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
+    <div class="mx-auto max-w-6xl px-4 py-24 sm:py-32">
+      <p class="mb-4 font-semibold tracking-wide text-brand-600 uppercase">
+        Academia de Petróleo y Gas
+      </p>
+      <h1 class="max-w-3xl text-4xl font-black tracking-tight text-slate-900 sm:text-6xl">
+        Formate en operaciones petroleras, desde la base hasta la sala de control.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-slate-600">
+        Más de 20 años de experiencia real en Upstream y Vaca Muerta, ahora en
+        una plataforma online, dinámica y a tu ritmo. Videos cortos, audios y
+        evaluaciones — nada de PDFs aburridos.
+      </p>
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+        <a
+          href="/cursos"
+          class="rounded-xl bg-brand-600 px-8 py-4 text-center text-base font-semibold text-white transition hover:bg-brand-700"
+        >
+          Ver los cursos
+        </a>
+        <a
+          href="#empresas"
+          class="rounded-xl border border-slate-300 px-8 py-4 text-center text-base font-semibold text-slate-700 transition hover:border-brand-300 hover:text-brand-700"
+        >
+          Soluciones para empresas
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cursos destacados -->
+  <section class="mx-auto max-w-6xl px-4 py-20">
+    <div class="mb-10 flex items-end justify-between">
+      <div>
+        <h2 class="text-3xl font-bold text-slate-900">Cursos destacados</h2>
+        <p class="mt-2 text-slate-500">Elegí por dónde empezar.</p>
+      </div>
+      <a href="/cursos" class="hidden text-sm font-semibold text-brand-600 hover:underline sm:block">
+        Ver todos →
+      </a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {destacados.map((curso) => <CursoCard curso={curso} />)}
+    </div>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4 py-20">
+      <h2 class="text-3xl font-bold text-slate-900">Del pago al aula, sin vueltas</h2>
+      <div class="mt-10 grid gap-8 sm:grid-cols-3">
+        <div>
+          <div class="text-2xl font-black text-brand-600">01</div>
+          <h3 class="mt-2 font-bold text-slate-900">Elegís y pagás</h3>
+          <p class="mt-1 text-sm text-slate-500">
+            Comprás el curso online con Mercado Pago, en cualquier momento.
+          </p>
+        </div>
+        <div>
+          <div class="text-2xl font-black text-brand-600">02</div>
+          <h3 class="mt-2 font-bold text-slate-900">Te damos de alta</h3>
+          <p class="mt-1 text-sm text-slate-500">
+            Recibís el acceso al aula online con tu curso listo para empezar.
+          </p>
+        </div>
+        <div>
+          <div class="text-2xl font-black text-brand-600">03</div>
+          <h3 class="mt-2 font-bold text-slate-900">Cursás a tu ritmo</h3>
+          <p class="mt-1 text-sm text-slate-500">
+            Videos, audios y evaluaciones. Seguís tu progreso desde cualquier
+            dispositivo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empresas (B2B) -->
+  <section id="empresas" class="mx-auto max-w-6xl px-4 py-20">
+    <div class="rounded-3xl bg-brand-800 p-10 text-white sm:p-16">
+      <h2 class="max-w-2xl text-3xl font-bold">¿Capacitás a un equipo?</h2>
+      <p class="mt-4 max-w-2xl text-brand-100">
+        Armamos paquetes de formación a medida para empresas: los cursos que tu
+        operación necesita, con un tablero para seguir el progreso de cada
+        empleado.
+      </p>
+      <a
+        href="#contacto"
+        class="mt-8 inline-block rounded-xl bg-white px-8 py-4 text-base font-semibold text-brand-800 transition hover:bg-brand-50"
+      >
+        Consultar por un paquete
+      </a>
+    </div>
+  </section>
+</Base>

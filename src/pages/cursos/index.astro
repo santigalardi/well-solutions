@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CursoCard from '../../components/CursoCard.astro';
+import { nivelLabel } from '../../lib/format';
+
+const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
+  .sort((a, b) => a.data.orden - b.data.orden);
+
+// Agrupamos por nivel para mostrar el catálogo estructurado.
+const niveles = ['principiante', 'intermedio', 'avanzado'] as const;
+const porNivel = niveles
+  .map((nivel) => ({
+    nivel,
+    cursos: cursos.filter((c) => c.data.nivel === nivel),
+  }))
+  .filter((g) => g.cursos.length > 0);
+---
+
+<Base
+  title="Cursos · Well Solutions Academia de Petróleo y Gas"
+  description="Catálogo de cursos de operaciones petroleras: desde la introducción al Upstream hasta control y optimización de producción."
+>
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h1 class="text-4xl font-black text-slate-900">Nuestros cursos</h1>
+    <p class="mt-3 max-w-2xl text-lg text-slate-600">
+      Un recorrido de principiante a avanzado por toda la operación petrolera.
+      Elegí un curso suelto o consultá por un paquete completo.
+    </p>
+
+    {
+      porNivel.map((grupo) => (
+        <div class="mt-14">
+          <h2 class="mb-6 text-2xl font-bold text-slate-900">
+            Nivel {nivelLabel[grupo.nivel]}
+          </h2>
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {grupo.cursos.map((curso) => (
+              <CursoCard curso={curso} />
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </section>
+</Base>

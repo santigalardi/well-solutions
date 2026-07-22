@@ -1,0 +1,14 @@
+# Variables de entorno para desarrollo local (Cloudflare / wrangler).
+# Copiá este archivo a `.dev.vars` y completá los valores reales.
+# En producción, cargar estos secrets en el dashboard de Cloudflare Pages.
+
+# Mercado Pago — Access Token (NUNCA exponer en el cliente).
+# Panel: https://www.mercadopago.com.ar/developers/panel/app
+MP_ACCESS_TOKEN="TEST-0000000000000000-000000-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-000000000"
+
+# URL pública del sitio (para los back_urls del checkout).
+PUBLIC_SITE_URL="http://localhost:4321"
+
+# GoHighLevel — webhook entrante donde cae el contacto/venta tras el pago.
+# (Se crea un "Inbound Webhook" en el workflow de GHL y se pega la URL acá.)
+GHL_WEBHOOK_URL=""

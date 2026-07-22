@@ -1,0 +1,60 @@
+---
+/*
+  Botón de compra. Es la única "isla" con lógica: al hacer clic llama a
+  /api/checkout, que crea la preferencia en Mercado Pago del lado del
+  servidor y devuelve la URL de pago (init_point). Redirige ahí.
+
+  Usa JS vanilla — no necesitamos un framework para esto.
+*/
+interface Props {
+  cursoId: string;
+  titulo: string;
+}
+const { cursoId, titulo } = Astro.props;
+---
+
+<button
+  type="button"
+  data-curso-id={cursoId}
+  data-curso-titulo={titulo}
+  class="boton-comprar w-full rounded-xl bg-brand-600 px-6 py-4 text-center text-base font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
+>
+  Comprar e inscribirme
+</button>
+<p class="boton-comprar-error mt-2 hidden text-center text-sm text-red-600"></p>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.boton-comprar').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const errorEl = btn.parentElement?.querySelector<HTMLElement>('.boton-comprar-error');
+      errorEl?.classList.add('hidden');
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Redirigiendo a Mercado Pago…';
+
+      try {
+        const res = await fetch('/api/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            cursoId: btn.dataset.cursoId,
+            titulo: btn.dataset.cursoTitulo,
+          }),
+        });
+        if (!res.ok) throw new Error('No se pudo iniciar el pago');
+        const data = (await res.json()) as { initPoint?: string };
+        if (!data.initPoint) throw new Error('Respuesta inválida del servidor');
+        window.location.href = data.initPoint;
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = original;
+        if (errorEl) {
+          errorEl.textContent =
+            'Hubo un problema al iniciar el pago. Probá de nuevo o escribinos.';
+          errorEl.classList.remove('hidden');
+        }
+        console.error(err);
+      }
+    });
+  });
+</script>
