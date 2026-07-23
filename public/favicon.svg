@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#1e40af"/>
-  <text x="16" y="22" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">W</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="13" fill="#0b2a4a"/>
+  <!-- Órbita / trayectoria (motivo del logo original) -->
+  <ellipse cx="32" cy="32" rx="25" ry="12" transform="rotate(-18 32 32)"
+    fill="none" stroke="#22d3ee" stroke-width="2.2"/>
+  <!-- Monograma WS -->
+  <text x="32" y="41" font-family="Georgia, 'Times New Roman', serif"
+    font-size="24" font-weight="700" fill="#ffffff" text-anchor="middle"
+    letter-spacing="-1">WS</text>
 </svg>

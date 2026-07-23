@@ -1,0 +1,63 @@
+---
+/*
+  Embed liviano de YouTube: muestra solo la miniatura (una imagen) y recién
+  al hacer clic inyecta el iframe con autoplay. Evita cargar ~1MB de player
+  de YouTube por video en el load inicial — la página sigue volando.
+*/
+interface Props {
+  id: string;
+  titulo: string;
+}
+const { id, titulo } = Astro.props;
+---
+
+<button
+  type="button"
+  class="video-lite corner-ticks group relative block w-full cursor-pointer overflow-hidden border border-white/15 bg-brand-950 p-0"
+  data-video-id={id}
+  aria-label={`Reproducir video: ${titulo}`}
+>
+  <img
+    src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+    alt={titulo}
+    class="aspect-video w-full object-cover opacity-75 transition duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
+    loading="lazy"
+    width="480"
+    height="360"
+  />
+  <!-- Botón de play -->
+  <span
+    class="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cyan-400 text-brand-950 shadow-lg transition group-hover:scale-110"
+    aria-hidden="true"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" class="ml-1 h-7 w-7">
+      <path d="M8 5.14v13.72L19 12 8 5.14z"></path>
+    </svg>
+  </span>
+  <!-- Título -->
+  <span
+    class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-950/90 to-transparent p-4 pt-10 text-left"
+  >
+    <span class="spec-label text-cyan-400">Video</span>
+    <span class="mt-1 block font-display font-bold text-white">{titulo}</span>
+  </span>
+</button>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.video-lite').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.videoId;
+      const wrap = document.createElement('div');
+      wrap.className = 'aspect-video w-full border border-white/15';
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.title = btn.getAttribute('aria-label') ?? 'Video';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.className = 'h-full w-full';
+      wrap.appendChild(iframe);
+      btn.replaceWith(wrap);
+    });
+  });
+</script>

@@ -1,25 +1,156 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
-/*
-  Paleta de marca Well Solutions — azul y blanco (definido con el cliente).
-  Ajustar los tonos exactos cuando llegue el logo / manual de marca.
-*/
+/* ============================================================
+   Well Solutions — Sistema de diseño "Blueprint industrial"
+   Navy petróleo profundo + acento cian. Estética de plano
+   técnico / ingeniería, elevada a producción.
+   (Definido con el cliente: azul y blanco.)
+   ============================================================ */
+
 @theme {
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #60a5fa;
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
-  --color-brand-800: #1e40af;
-  --color-brand-900: #1e3a8a;
-  --color-brand-950: #172554;
+  /* --- Azul petróleo (brand = navy) --- */
+  --color-brand-50: #eef4fb;
+  --color-brand-100: #d5e4f5;
+  --color-brand-200: #adc8e8;
+  --color-brand-300: #6f9bd1;
+  --color-brand-400: #3a6bb0;
+  --color-brand-500: #1d4ed8;
+  --color-brand-600: #14427a;
+  --color-brand-700: #0f3560;
+  --color-brand-800: #0b2a4a;
+  --color-brand-900: #071d34;
+  --color-brand-950: #061625;
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  /* --- Acento cian eléctrico --- */
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+
+  /* --- Neutros (papel / gris blueprint) --- */
+  --color-paper: #f7f9fc;
+  --color-ink: #0a1826;
+  --color-mist: #e3ebf5;
+
+  /* --- Tipografía --- */
+  --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* --- Sombras técnicas --- */
+  --shadow-blueprint: 0 1px 0 0 rgba(11, 42, 74, 0.04),
+    0 8px 30px -12px rgba(11, 42, 74, 0.18);
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-feature-settings: 'ss01';
+}
+
+/* --- Patrón de grilla blueprint --- */
+.bg-blueprint {
+  background-image:
+    linear-gradient(rgba(11, 42, 74, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 42, 74, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.bg-blueprint-dark {
+  background-image:
+    linear-gradient(rgba(103, 232, 249, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103, 232, 249, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* --- Label técnico tipo especificación de plano --- */
+.spec-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* --- Marco de esquina tipo "corner ticks" de plano --- */
+.corner-ticks {
+  position: relative;
+}
+.corner-ticks::before,
+.corner-ticks::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--color-cyan-400);
+  border-style: solid;
+  pointer-events: none;
+}
+.corner-ticks::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.corner-ticks::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* --- Animaciones de entrada --- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes draw-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.draw-line {
+  transform-origin: left;
+  animation: draw-line 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- Flotación sutil de la foto del hero (loop) --- */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float-soft { animation: float-soft 7s ease-in-out infinite; }
+
+/* --- Parallax reactivo al mouse (lo mueve JS via --px/--py) --- */
+.hero-tilt {
+  transform: translate3d(calc(var(--px, 0) * 1px), calc(var(--py, 0) * 1px), 0);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* --- Brillo que barre el botón primario al hover --- */
+.sheen { position: relative; overflow: hidden; }
+.sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%) skewX(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.sheen:hover::after { transform: translateX(120%) skewX(-20deg); }
+
+/* --- Reveal en escala para badges/sellos --- */
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.85) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.pop-in { animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .draw-line, .float-soft, .pop-in { animation: none; }
+  .hero-tilt { transform: none; }
+  .sheen::after { display: none; }
 }

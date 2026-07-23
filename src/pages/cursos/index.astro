@@ -15,32 +15,124 @@ const porNivel = niveles
     cursos: cursos.filter((c) => c.data.nivel === nivel),
   }))
   .filter((g) => g.cursos.length > 0);
+
+const nivelDescripcion: Record<string, string> = {
+  principiante: 'Los cimientos: entendé la industria y sus procesos desde cero.',
+  intermedio: 'Dominá la operación: sistemas de extracción y liderazgo de equipos.',
+  avanzado: 'Optimización, seguridad y control — el nivel de la sala de control.',
+};
+
+// Acento de color por nivel (coherente con la barra de las cards).
+const nivelAccent: Record<string, { text: string; bar: string; dot: string }> = {
+  principiante: { text: 'text-emerald-600', bar: 'bg-emerald-400', dot: 'bg-emerald-400' },
+  intermedio: { text: 'text-cyan-600', bar: 'bg-cyan-400', dot: 'bg-cyan-400' },
+  avanzado: { text: 'text-brand-600', bar: 'bg-brand-500', dot: 'bg-brand-500' },
+};
+
+// Highlights para la cabecera.
+const highlights = [
+  { n: `${cursos.length}`, l: 'cursos disponibles' },
+  { n: '3', l: 'niveles de progresión' },
+  { n: '100%', l: 'online, a tu ritmo' },
+];
 ---
 
 <Base
   title="Cursos · Well Solutions Academia de Petróleo y Gas"
-  description="Catálogo de cursos de operaciones petroleras: desde la introducción al Upstream hasta control y optimización de producción."
+  description="Catálogo de cursos de operaciones petroleras: procesos Oil y Gas, bombeo mecánico, plunger lift, seguridad operativa y liderazgo. Online, a tu ritmo."
 >
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <h1 class="text-4xl font-black text-slate-900">Nuestros cursos</h1>
-    <p class="mt-3 max-w-2xl text-lg text-slate-600">
-      Un recorrido de principiante a avanzado por toda la operación petrolera.
-      Elegí un curso suelto o consultá por un paquete completo.
-    </p>
+  <!-- Cabecera navy -->
+  <section class="relative overflow-hidden bg-brand-950 text-white">
+    <div class="absolute -left-32 top-0 h-96 w-96 rounded-full bg-brand-500/20 blur-[130px]"></div>
+    <div class="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-cyan-400/10 blur-[120px]"></div>
+    <div class="relative mx-auto max-w-6xl px-4 py-20">
+      <div class="flex items-center gap-3">
+        <span class="h-px w-10 bg-cyan-400"></span>
+        <p class="spec-label text-cyan-400">Catálogo · {cursos.length} cursos</p>
+      </div>
+      <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-6xl">
+        Nuestros cursos
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-brand-100">
+        Un recorrido de principiante a avanzado por toda la operación
+        petrolera. Elegí un curso suelto o consultá por un paquete completo.
+      </p>
 
-    {
-      porNivel.map((grupo) => (
-        <div class="mt-14">
-          <h2 class="mb-6 text-2xl font-bold text-slate-900">
-            Nivel {nivelLabel[grupo.nivel]}
-          </h2>
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {grupo.cursos.map((curso) => (
-              <CursoCard curso={curso} />
-            ))}
+      <!-- Highlights -->
+      <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+        {highlights.map((h) => (
+          <div class="flex items-baseline gap-2">
+            <span class="font-display text-3xl font-extrabold text-cyan-400">{h.n}</span>
+            <span class="text-sm text-brand-100/70">{h.l}</span>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-20">
+      {
+        porNivel.map((grupo) => (
+          <div class="mb-20 last:mb-0">
+            <div class="flex flex-wrap items-center gap-4 border-b border-brand-200 pb-5">
+              <span class={`h-8 w-1.5 rounded-full ${nivelAccent[grupo.nivel].bar}`} />
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <span class={`h-1.5 w-1.5 rounded-full ${nivelAccent[grupo.nivel].dot}`} />
+                  <h2 class={`spec-label ${nivelAccent[grupo.nivel].text}`}>
+                    Nivel · {nivelLabel[grupo.nivel]}
+                  </h2>
+                </div>
+                <p class="mt-2 max-w-xl text-slate-600">
+                  {nivelDescripcion[grupo.nivel]}
+                </p>
+              </div>
+              <span class="spec-label whitespace-nowrap text-slate-400">
+                {grupo.cursos.length} {grupo.cursos.length === 1 ? 'curso' : 'cursos'}
+              </span>
+            </div>
+            <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {grupo.cursos.map((curso) => (
+                <CursoCard curso={curso} />
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- CTA final: paquete / B2B -->
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 pb-20">
+      <div class="relative overflow-hidden rounded-3xl bg-brand-950 p-10 text-white sm:p-14">
+        <div class="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-cyan-400/10 blur-[120px]"></div>
+        <div class="relative flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+          <div class="max-w-xl">
+            <div class="flex items-center gap-3">
+              <span class="h-px w-10 bg-cyan-400"></span>
+              <p class="spec-label text-cyan-400">¿No sabés por dónde empezar?</p>
+            </div>
+            <h2 class="mt-5 font-display text-3xl font-extrabold sm:text-4xl">
+              Te armamos un plan a medida
+            </h2>
+            <p class="mt-4 text-lg text-brand-100">
+              Contanos tu experiencia o la de tu equipo y te recomendamos el
+              recorrido ideal — para vos o para toda tu operación.
+            </p>
+          </div>
+          <a
+            href="https://wa.me/5492995335935"
+            target="_blank"
+            rel="noopener"
+            class="sheen group inline-flex shrink-0 items-center gap-2 rounded-xl bg-cyan-400 px-8 py-4 text-base font-bold text-brand-950 shadow-lg shadow-cyan-400/20 transition hover:bg-cyan-300 hover:shadow-cyan-400/40"
+          >
+            Hablar con un asesor
+            <span class="transition group-hover:translate-x-1">→</span>
+          </a>
         </div>
-      ))
-    }
+      </div>
+    </div>
   </section>
 </Base>

@@ -2,106 +2,466 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import CursoCard from '../components/CursoCard.astro';
+import VideoLite from '../components/VideoLite.astro';
 
 const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
   .sort((a, b) => a.data.orden - b.data.orden);
 const destacados = cursos.filter((c) => c.data.destacado).slice(0, 3);
+
+// Referencias reales de campo (del sitio actual del cliente).
+const referencias = ['YPF', 'Chevron', 'Apache', 'PAE', 'VISTA'];
+
+const pasos = [
+  {
+    n: '01',
+    t: 'Elegís y pagás',
+    d: 'Comprás el curso online con Mercado Pago, cuando quieras. Sin trámites ni esperas.',
+    // Ícono: tarjeta / pago
+    icon: '<rect x="2.5" y="5" width="19" height="14" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M2.5 9.5h19" stroke="currentColor" stroke-width="1.6"/><path d="M6 14.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  },
+  {
+    n: '02',
+    t: 'Te damos de alta',
+    d: 'Recibís el acceso al aula online con tu curso listo para arrancar.',
+    // Ícono: llave / acceso
+    icon: '<circle cx="8" cy="8" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M11.5 11.5 20 20M17 17l2-2M15 15l1.5-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+  },
+  {
+    n: '03',
+    t: 'Cursás a tu ritmo',
+    d: 'Videos cortos, audios y evaluaciones. Seguís tu progreso desde el celular o la sala de control.',
+    // Ícono: play / reproducir
+    icon: '<circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.6"/><path d="M10 8.5 15.5 12 10 15.5V8.5Z" fill="currentColor"/>',
+  },
+];
+
+// Servicios de campo (verbatim del sitio actual, curados).
+const serviciosCampo = [
+  'Informes técnicos y estado de pozos',
+  'Auditoría integral de captación y tratamiento',
+  'Operación de sistemas de extracción artificial (ALS)',
+  'Optimización de producción',
+  'Monitoreo, control y diagnóstico de pozos',
+  'Procedimientos operativos y gestión documental',
+  'Asesoramiento remoto',
+  'Capacitaciones in situ',
+];
+
+const social = {
+  linkedin: 'https://www.linkedin.com/in/jos%C3%A9-luis-barros-0822a412b',
+  facebook: 'https://www.facebook.com/joseluis.barros.3',
+  whatsapp: 'https://wa.me/5492995335935',
+};
 ---
 
 <Base title="Well Solutions · Academia de Petróleo y Gas">
-  <!-- Hero -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
-    <div class="mx-auto max-w-6xl px-4 py-24 sm:py-32">
-      <p class="mb-4 font-semibold tracking-wide text-brand-600 uppercase">
-        Academia de Petróleo y Gas
-      </p>
-      <h1 class="max-w-3xl text-4xl font-black tracking-tight text-slate-900 sm:text-6xl">
-        Formate en operaciones petroleras, desde la base hasta la sala de control.
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg text-slate-600">
-        Más de 20 años de experiencia real en Upstream y Vaca Muerta, ahora en
-        una plataforma online, dinámica y a tu ritmo. Videos cortos, audios y
-        evaluaciones — nada de PDFs aburridos.
-      </p>
-      <div class="mt-10 flex flex-col gap-4 sm:flex-row">
-        <a
-          href="/cursos"
-          class="rounded-xl bg-brand-600 px-8 py-4 text-center text-base font-semibold text-white transition hover:bg-brand-700"
-        >
-          Ver los cursos
-        </a>
-        <a
-          href="#empresas"
-          class="rounded-xl border border-slate-300 px-8 py-4 text-center text-base font-semibold text-slate-700 transition hover:border-brand-300 hover:text-brand-700"
-        >
-          Soluciones para empresas
-        </a>
-      </div>
-    </div>
-  </section>
+  <!-- ===================== HERO ===================== -->
+  <section class="relative overflow-hidden bg-brand-950 text-white">
+    <div class="absolute inset-0 bg-blueprint-dark opacity-70"></div>
+    <!-- Órbita decorativa (motivo del logo) -->
+    <svg
+      class="pointer-events-none absolute -right-40 top-1/2 h-[560px] w-[900px] -translate-y-1/2 opacity-15"
+      viewBox="0 0 900 560"
+      fill="none"
+      aria-hidden="true"
+    >
+      <ellipse cx="450" cy="280" rx="420" ry="150" transform="rotate(-20 450 280)" stroke="#22d3ee" stroke-width="1.5"></ellipse>
+      <ellipse cx="450" cy="280" rx="330" ry="110" transform="rotate(-20 450 280)" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4 8"></ellipse>
+    </svg>
+    <div class="absolute -left-20 top-0 h-96 w-96 rounded-full bg-brand-500/20 blur-[120px]"></div>
 
-  <!-- Cursos destacados -->
-  <section class="mx-auto max-w-6xl px-4 py-20">
-    <div class="mb-10 flex items-end justify-between">
+    <div class="relative mx-auto grid max-w-6xl gap-14 px-4 py-20 sm:py-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
       <div>
-        <h2 class="text-3xl font-bold text-slate-900">Cursos destacados</h2>
-        <p class="mt-2 text-slate-500">Elegí por dónde empezar.</p>
+        <div class="rise flex items-center gap-3">
+          <span class="h-px w-10 bg-cyan-400"></span>
+          <p class="spec-label text-cyan-400">Advisors · Producción Oil y Gas · Neuquén</p>
+        </div>
+
+        <h1
+          class="rise mt-6 font-display text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl xl:text-7xl"
+          style="animation-delay: 80ms"
+        >
+          Del yacimiento a la
+          <span class="relative whitespace-nowrap text-cyan-400">
+            sala de control.
+            <span class="draw-line absolute -bottom-2 left-0 h-1 w-full bg-cyan-400/60" style="animation-delay: 700ms"></span>
+          </span>
+        </h1>
+
+        <p class="rise mt-8 max-w-xl text-lg text-brand-100/80 sm:text-xl" style="animation-delay: 160ms">
+          Formate en operaciones petroleras con quienes estuvieron en el campo.
+          <strong class="font-semibold text-white">20 años de know-how</strong> en
+          Vaca Muerta, ahora en una academia online, dinámica y a tu ritmo.
+        </p>
+
+        <div class="rise mt-10 flex flex-col gap-4 sm:flex-row" style="animation-delay: 240ms">
+          <a
+            href="/cursos"
+            class="sheen group inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-8 py-4 text-base font-bold text-brand-950 shadow-lg shadow-cyan-400/20 transition hover:bg-cyan-300 hover:shadow-cyan-400/40"
+          >
+            Ver los cursos
+            <span class="transition group-hover:translate-x-1">→</span>
+          </a>
+          <a
+            href="#empresas"
+            class="inline-flex items-center justify-center rounded-xl border border-white/20 px-8 py-4 text-base font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+          >
+            Soluciones para empresas
+          </a>
+        </div>
       </div>
-      <a href="/cursos" class="hidden text-sm font-semibold text-brand-600 hover:underline sm:block">
-        Ver todos →
-      </a>
+
+      <!-- Foto real de campo, enmarcada como registro de plano -->
+      <figure class="rise relative hidden lg:block" style="animation-delay: 320ms">
+        <div id="hero-tilt" class="hero-tilt float-soft">
+          <div class="corner-ticks relative border border-white/15 bg-brand-900/40 p-3 backdrop-blur-sm">
+            <div class="relative overflow-hidden">
+              <img
+                src="/campo/equipo-campo.jpg"
+                alt="Equipo de intervención de pozo en campo, Neuquén"
+                class="w-full object-cover"
+                width="839"
+                height="839"
+                loading="eager"
+                fetchpriority="high"
+              />
+              <!-- Blend hacia el navy del fondo para integrar la foto -->
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/70 via-transparent to-brand-950/20"></div>
+              <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"></div>
+            </div>
+          </div>
+
+          <!-- Sello flotante -->
+          <div class="pop-in absolute -left-6 -top-6 rounded-xl border border-cyan-400/30 bg-brand-950/90 px-5 py-3 shadow-xl shadow-brand-950/50 backdrop-blur" style="animation-delay: 900ms">
+            <p class="font-display text-3xl font-extrabold leading-none text-cyan-400">+20</p>
+            <p class="spec-label mt-1 text-brand-100/60">años en campo</p>
+          </div>
+        </div>
+        <figcaption class="mt-3 flex items-center justify-between">
+          <span class="spec-label text-brand-100/50">Registro de campo · Neuquén</span>
+          <span class="spec-label text-cyan-400">FIG. 01</span>
+        </figcaption>
+      </figure>
     </div>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {destacados.map((curso) => <CursoCard curso={curso} />)}
+
+    <!-- Banda de referencias -->
+    <div class="relative">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-10 gap-y-3 px-4 py-6">
+        <span class="spec-label text-brand-100/50">Trabajamos en campo con</span>
+        {referencias.map((r) => (
+          <span class="font-display text-lg font-bold tracking-wide text-white/70">{r}</span>
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- Cómo funciona -->
-  <section class="bg-slate-50">
-    <div class="mx-auto max-w-6xl px-4 py-20">
-      <h2 class="text-3xl font-bold text-slate-900">Del pago al aula, sin vueltas</h2>
-      <div class="mt-10 grid gap-8 sm:grid-cols-3">
-        <div>
-          <div class="text-2xl font-black text-brand-600">01</div>
-          <h3 class="mt-2 font-bold text-slate-900">Elegís y pagás</h3>
-          <p class="mt-1 text-sm text-slate-500">
-            Comprás el curso online con Mercado Pago, en cualquier momento.
-          </p>
+  <!-- ===================== EXPERIENCIA ===================== -->
+  <section id="nosotros" class="relative scroll-mt-28 bg-paper">
+    <div class="mx-auto grid max-w-6xl gap-12 px-4 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="h-px w-10 bg-brand-500"></span>
+          <p class="spec-label text-brand-500">Quiénes somos</p>
         </div>
-        <div>
-          <div class="text-2xl font-black text-brand-600">02</div>
-          <h3 class="mt-2 font-bold text-slate-900">Te damos de alta</h3>
-          <p class="mt-1 text-sm text-slate-500">
-            Recibís el acceso al aula online con tu curso listo para empezar.
-          </p>
+        <h2 class="mt-5 max-w-xl font-display text-3xl font-bold text-brand-900 sm:text-4xl">
+          No es teoría de manual. Es lo que aprendimos operando pozos.
+        </h2>
+        <p class="mt-6 max-w-xl text-lg text-slate-600">
+          Somos un grupo de profesionales con 20 años en explotación de
+          hidrocarburos, en yacimientos convencionales y no convencionales.
+          Fuimos pioneros en las nuevas filosofías de operación y salas de
+          control de Vaca Muerta — y ahora formamos a la próxima generación de
+          operadores y líderes.
+        </p>
+        <p class="mt-4 max-w-xl text-lg text-slate-600">
+          Nuestro camino incluye el primer desarrollo no convencional de Loma
+          Campana junto a YPF/Chevron, operaciones con Apache, PAE y Vista, y
+          la formación de futuros profesionales junto a la UTN.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          {['Sistemas de extracción artificial', 'Procesos Oil y Gas', 'Seguridad operativa', 'Liderazgo'].map((t) => (
+            <span class="rounded-full border border-brand-200 bg-white px-4 py-1.5 text-sm font-medium text-brand-800">{t}</span>
+          ))}
         </div>
-        <div>
-          <div class="text-2xl font-black text-brand-600">03</div>
-          <h3 class="mt-2 font-bold text-slate-900">Cursás a tu ritmo</h3>
-          <p class="mt-1 text-sm text-slate-500">
-            Videos, audios y evaluaciones. Seguís tu progreso desde cualquier
-            dispositivo.
-          </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 gap-4">
+        {[
+          { n: '20', u: 'años', d: 'de know-how operando en campo' },
+          { n: '5', u: 'cursos', d: 'construidos sobre operación real' },
+          { n: '3', u: 'niveles', d: 'de ingresante a avanzado' },
+          { n: '100%', u: 'online', d: 'a tu ritmo, desde el celu' },
+        ].map((s) => (
+          <div class="group flex flex-col gap-3 rounded-xl border border-brand-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:shadow-lg hover:shadow-brand-500/10">
+            <div class="flex items-baseline gap-2">
+              <span class="font-display text-5xl font-extrabold leading-none text-brand-900">{s.n}</span>
+              <span class="font-display text-lg font-bold text-cyan-500">{s.u}</span>
+            </div>
+            <p class="text-sm leading-snug text-slate-500">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INSTRUCTOR ===================== -->
+  <section class="relative overflow-hidden border-y border-brand-100 bg-brand-950 text-white">
+    <div class="absolute -right-32 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-brand-500/20 blur-[130px]"></div>
+
+    <div class="relative mx-auto grid max-w-6xl items-center gap-14 px-4 py-24 lg:grid-cols-[0.85fr_1.15fr]">
+      <!-- Foto -->
+      <figure class="relative mx-auto w-full max-w-sm">
+        <div class="corner-ticks relative overflow-hidden border border-white/15 bg-brand-900/40 p-3 backdrop-blur-sm">
+          <div class="relative overflow-hidden">
+            <img
+              src="/joseluis.jpeg"
+              alt="José Luis Barros en el 10° Congreso de Exploración y Desarrollo de Hidrocarburos"
+              class="aspect-[3/4] w-full object-cover object-top"
+              width="747"
+              height="1201"
+              loading="lazy"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/60 via-transparent to-transparent"></div>
+            <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"></div>
+          </div>
+        </div>
+        <figcaption class="mt-3 flex items-center justify-between">
+          <span class="spec-label text-brand-100/50">Congreso de Hidrocarburos</span>
+          <span class="spec-label text-cyan-400">FIG. 02</span>
+        </figcaption>
+      </figure>
+
+      <!-- Bio -->
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="h-px w-10 bg-cyan-400"></span>
+          <p class="spec-label text-cyan-400">Tu instructor</p>
+        </div>
+        <h2 class="mt-5 font-display text-4xl font-extrabold sm:text-5xl">
+          José Luis Barros
+        </h2>
+        <p class="spec-label mt-3 text-cyan-400">
+          Fundador · Well Solutions Advisors
+        </p>
+        <p class="mt-6 max-w-xl text-lg text-brand-100">
+          Técnico superior con <strong class="font-semibold text-white">20 años de operación en Upstream</strong>,
+          en yacimientos convencionales y no convencionales. Pionero en la
+          implementación de las nuevas filosofías de operación y salas de control
+          que hoy definen el estándar en Vaca Muerta.
+        </p>
+        <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+          {[
+            'Operaciones con Apache, YPF/Chevron (Loma Campana), PAE y Vista',
+            'Docente en la UTN, formando futuros profesionales del petróleo y el gas',
+            'Expositor en congresos de la industria de hidrocarburos',
+            'Especialista en extracción artificial, algoritmos predictivos y manejo por excepción',
+          ].map((item) => (
+            <li class="flex items-start gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4 text-base text-brand-50">
+              <svg viewBox="0 0 20 20" fill="currentColor" class="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0z" clip-rule="evenodd"></path></svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href={social.linkedin}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"></path></svg>
+            LinkedIn
+          </a>
+          <a
+            href={social.facebook}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.09 24 12.07z"></path></svg>
+            Facebook
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Empresas (B2B) -->
-  <section id="empresas" class="mx-auto max-w-6xl px-4 py-20">
-    <div class="rounded-3xl bg-brand-800 p-10 text-white sm:p-16">
-      <h2 class="max-w-2xl text-3xl font-bold">¿Capacitás a un equipo?</h2>
-      <p class="mt-4 max-w-2xl text-brand-100">
-        Armamos paquetes de formación a medida para empresas: los cursos que tu
-        operación necesita, con un tablero para seguir el progreso de cada
-        empleado.
-      </p>
-      <a
-        href="#contacto"
-        class="mt-8 inline-block rounded-xl bg-white px-8 py-4 text-base font-semibold text-brand-800 transition hover:bg-brand-50"
-      >
-        Consultar por un paquete
+  <!-- ===================== CURSOS DESTACADOS ===================== -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-24">
+      <div class="mb-12 flex items-end justify-between">
+        <div>
+          <div class="flex items-center gap-3">
+            <span class="h-px w-10 bg-brand-500"></span>
+            <p class="spec-label text-brand-500">Catálogo</p>
+          </div>
+          <h2 class="mt-5 font-display text-3xl font-bold text-brand-900 sm:text-4xl">
+            Elegí por dónde empezar
+          </h2>
+        </div>
+        <a href="/cursos" class="hidden text-sm font-semibold text-brand-600 hover:text-cyan-500 sm:block">
+          Ver todos los cursos →
+        </a>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {destacados.map((curso) => <CursoCard curso={curso} />)}
+      </div>
+      <a href="/cursos" class="mt-8 block text-center text-sm font-semibold text-brand-600 hover:text-cyan-500 sm:hidden">
+        Ver todos los cursos →
       </a>
     </div>
   </section>
+
+  <!-- ===================== OPERACIONES EN CAMPO / ADVISOR ===================== -->
+  <section id="servicios" class="relative scroll-mt-28 overflow-hidden bg-brand-950 text-white">
+    <div class="absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-brand-500/20 blur-[130px]"></div>
+    <div class="relative mx-auto grid max-w-6xl gap-14 px-4 py-24 lg:grid-cols-[1fr_1fr] lg:items-center">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="h-px w-10 bg-cyan-400"></span>
+          <p class="spec-label text-cyan-400">Well Solutions Advisors</p>
+        </div>
+        <h2 class="mt-5 font-display text-4xl font-extrabold sm:text-5xl">
+          También vamos al campo.
+        </h2>
+        <p class="mt-6 max-w-lg text-lg text-brand-100">
+          Además de la academia, brindamos servicio especializado en
+          operaciones de pozos, sistemas de extracción y procesos — en sitio o
+          de forma remota.
+        </p>
+        <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+          {serviciosCampo.map((s) => (
+            <li class="flex items-start gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-3.5 text-sm text-brand-50">
+              <svg viewBox="0 0 20 20" fill="currentColor" class="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0z" clip-rule="evenodd"></path></svg>
+              {s}
+            </li>
+          ))}
+        </ul>
+        <a
+          href={social.whatsapp}
+          target="_blank"
+          rel="noopener"
+          class="sheen group mt-10 inline-flex items-center gap-2 rounded-xl bg-cyan-400 px-8 py-4 text-base font-bold text-brand-950 shadow-lg shadow-cyan-400/20 transition hover:bg-cyan-300 hover:shadow-cyan-400/40"
+        >
+          Consultar por asesoramiento
+          <span class="transition group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+
+      <!-- Collage de fotos reales -->
+      <div class="grid grid-cols-2 gap-4">
+        <figure class="corner-ticks relative border border-white/15 bg-brand-900/40 p-2 sm:translate-y-6">
+          <div class="relative overflow-hidden">
+            <img src="/campo/equipo-campo.jpg" alt="Equipo de intervención de pozo en Vaca Muerta" class="aspect-[3/4] w-full object-cover" width="839" height="1118" loading="lazy" />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/50 to-transparent"></div>
+            <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"></div>
+          </div>
+          <figcaption class="spec-label px-1 pt-2 text-brand-100/60">Intervención de pozo</figcaption>
+        </figure>
+        <figure class="corner-ticks relative border border-white/15 bg-brand-900/40 p-2">
+          <div class="relative overflow-hidden">
+            <img src="/campo/sala-control.jpg" alt="Sala de control de operaciones" class="aspect-[3/4] w-full object-cover" width="764" height="1019" loading="lazy" />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/50 to-transparent"></div>
+            <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"></div>
+          </div>
+          <figcaption class="spec-label px-1 pt-2 text-brand-100/60">Sala de control</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VIDEOS ===================== -->
+  <section class="relative bg-brand-950 pb-24 text-white">
+    <div class="relative mx-auto max-w-6xl border-t border-white/10 px-4 pt-16">
+      <div class="flex items-center gap-3">
+        <span class="h-px w-10 bg-cyan-400"></span>
+        <p class="spec-label text-cyan-400">Conocé la industria</p>
+      </div>
+      <h2 class="mt-5 font-display text-3xl font-bold">
+        ¿Nuevo en el mundo del petróleo? Empezá por acá.
+      </h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2">
+        <VideoLite id="AvQehv_KPHQ" titulo="¿Qué es Vaca Muerta?" />
+        <VideoLite id="TVZ0DOZ59SA" titulo="¿Cómo se realiza una fractura hidráulica?" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CÓMO FUNCIONA ===================== -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-6xl px-4 py-24">
+      <div class="flex items-center gap-3">
+        <span class="h-px w-10 bg-brand-500"></span>
+        <p class="spec-label text-brand-500">Cómo funciona</p>
+      </div>
+      <h2 class="mt-5 font-display text-3xl font-bold text-brand-900 sm:text-4xl">
+        Empezá hoy mismo
+      </h2>
+
+      <div class="relative mt-14 grid gap-8 sm:grid-cols-3">
+        <!-- Línea conectora del flujo (desktop) -->
+        <div class="pointer-events-none absolute left-0 right-0 top-8 hidden h-px bg-gradient-to-r from-cyan-400/40 via-cyan-400/40 to-transparent sm:block"></div>
+
+        {pasos.map((p, i) => (
+          <div class="group relative flex flex-col rounded-2xl border border-brand-200 bg-white p-8 transition duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:shadow-xl hover:shadow-brand-500/10">
+            <div class="flex items-center justify-between">
+              <span class="flex h-16 w-16 items-center justify-center rounded-xl bg-brand-50 text-cyan-500 transition group-hover:bg-cyan-400 group-hover:text-brand-950">
+                <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7" aria-hidden="true" set:html={p.icon}></svg>
+              </span>
+              <span class="font-mono text-4xl font-bold text-brand-100">{p.n}</span>
+            </div>
+            <h3 class="mt-6 font-display text-xl font-bold text-brand-900">{p.t}</h3>
+            <p class="mt-2 text-slate-500">{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EMPRESAS (B2B) ===================== -->
+  <section id="empresas" class="scroll-mt-28 bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-24">
+      <div class="relative overflow-hidden rounded-3xl bg-brand-950 p-10 text-white sm:p-16">
+        <div class="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-cyan-400/10 blur-[120px]"></div>
+        <div class="relative max-w-2xl">
+          <div class="flex items-center gap-3">
+            <span class="h-px w-10 bg-cyan-400"></span>
+            <p class="spec-label text-cyan-400">Para empresas · B2B</p>
+          </div>
+          <h2 class="mt-5 font-display text-3xl font-bold sm:text-4xl">
+            ¿Capacitás a un equipo de operación?
+          </h2>
+          <p class="mt-4 text-lg text-brand-100/80">
+            Armamos paquetes de formación a medida: los cursos que tu operación
+            necesita, con un tablero para seguir el progreso de cada empleado.
+          </p>
+          <a
+            href={social.whatsapp}
+            target="_blank"
+            rel="noopener"
+            class="mt-8 inline-flex items-center gap-2 rounded-xl bg-cyan-400 px-8 py-4 text-base font-bold text-brand-950 transition hover:bg-cyan-300"
+          >
+            Consultar por un paquete
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parallax sutil de la foto del hero al mover el mouse -->
+  <script>
+    const tilt = document.getElementById('hero-tilt');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (tilt && !reduce && window.matchMedia('(min-width: 1024px)').matches) {
+      const strength = 14;
+      window.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 2;
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+        tilt.style.setProperty('--px', (x * strength).toFixed(2));
+        tilt.style.setProperty('--py', (y * strength).toFixed(2));
+      });
+    }
+  </script>
 </Base>
