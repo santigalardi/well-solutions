@@ -52,7 +52,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
       failure: `${siteUrl}/cursos/${curso.id}?pago=error`,
       pending: `${siteUrl}/gracias?curso=${curso.id}&estado=pendiente`,
     },
-    auto_return: 'approved',
+    // auto_return exige back_urls HTTPS; en dev local (http) MP lo rechaza.
+    ...(siteUrl.startsWith('https://') ? { auto_return: 'approved' } : {}),
+    // Sin esto MP no notifica al webhook: hay que declararlo por preferencia
+    // (o configurarlo global en el panel de la app; hacemos ambos).
+    // MP exige HTTPS público, así que en dev local no se manda.
+    ...(siteUrl.startsWith('https://')
+      ? { notification_url: `${siteUrl}/api/webhook-mp` }
+      : {}),
     // Referencia para reconciliar el pago en el webhook.
     external_reference: curso.id,
     metadata: { curso_id: curso.id, curso_titulo: curso.data.titulo },

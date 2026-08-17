@@ -9,14 +9,17 @@ export const prerender = false;
   en el CRM. Desde GHL se automatiza el aviso a José, que da de alta al
   alumno en Skool (paso manual, como se acordó con el cliente).
 
+  Si MP_WEBHOOK_SECRET está configurado, se valida la firma x-signature
+  (la clave se saca del panel de la app en MP al configurar el webhook).
+
   TODO cuando esté GHL definido:
     - Mapear los campos al formato del inbound webhook de GHL.
-    - Idealmente validar la firma (x-signature) de MP para seguridad.
 */
 export const POST: APIRoute = async ({ request, locals }) => {
   const env = (locals as any).runtime?.env ?? {};
   const accessToken = env.MP_ACCESS_TOKEN ?? import.meta.env.MP_ACCESS_TOKEN;
   const ghlWebhookUrl = env.GHL_WEBHOOK_URL ?? import.meta.env.GHL_WEBHOOK_URL;
+  const webhookSecret = env.MP_WEBHOOK_SECRET ?? import.meta.env.MP_WEBHOOK_SECRET;
 
   let payload: any;
   try {
@@ -31,6 +34,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const type = payload?.type ?? payload?.topic;
   if (type !== 'payment' || !paymentId) {
     return new Response('ignored', { status: 200 });
+  }
+
+  if (webhookSecret) {
+    const valida = await verificarFirma(request, String(paymentId), webhookSecret);
+    if (!valida) {
+      console.error('Webhook MP: firma inválida, se descarta la notificación');
+      return new Response('invalid signature', { status: 401 });
+    }
   }
 
   if (!accessToken) {
@@ -75,3 +86,43 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   return new Response('ok', { status: 200 });
 };
+
+/*
+  Valida la firma HMAC-SHA256 que manda MP en el header x-signature
+  (formato "ts=...,v1=..."). El manifest se arma según la doc oficial:
+  "id:[data.id];request-id:[x-request-id];ts:[ts];" — cada parte se
+  omite si el valor no está presente.
+  https://www.mercadopago.com.ar/developers/es/docs/your-integrations/notifications/webhooks#validacindeorigendelanotificacin
+*/
+async function verificarFirma(
+  request: Request,
+  dataId: string,
+  secret: string,
+): Promise<boolean> {
+  const signature = request.headers.get('x-signature');
+  if (!signature) return false;
+
+  const partes = Object.fromEntries(
+    signature.split(',').map((p) => p.trim().split('=', 2) as [string, string]),
+  );
+  const ts = partes['ts'];
+  const v1 = partes['v1'];
+  if (!ts || !v1) return false;
+
+  const requestId = request.headers.get('x-request-id');
+  let manifest = '';
+  if (dataId) manifest += `id:${dataId.toLowerCase()};`;
+  if (requestId) manifest += `request-id:${requestId};`;
+  manifest += `ts:${ts};`;
+
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  );
+  const firma = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(manifest));
+  const hex = [...new Uint8Array(firma)].map((b) => b.toString(16).padStart(2, '0')).join('');
+  return hex === v1;
+}
