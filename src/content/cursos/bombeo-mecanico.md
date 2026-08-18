@@ -20,8 +20,8 @@ precio:
   ars: 140000
   usd: 93
 orden: 2
-publicado: true
-destacado: true
+publicado: false
+destacado: false
 ---
 
 Un curso de **operación y optimización** del bombeo mecánico, el sistema de

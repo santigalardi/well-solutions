@@ -20,8 +20,8 @@ precio:
   ars: 180000
   usd: 120
 orden: 4
-publicado: true
-destacado: true
+publicado: false
+destacado: false
 ---
 
 El curso más avanzado de extracción artificial: **plunger lift**, con foco en

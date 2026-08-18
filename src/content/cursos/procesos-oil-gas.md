@@ -21,8 +21,8 @@ precio:
   ars: 90000
   usd: 60
 orden: 1
-publicado: true
-destacado: true
+publicado: false
+destacado: false
 ---
 
 El punto de entrada ideal a la operación: un recorrido completo por los

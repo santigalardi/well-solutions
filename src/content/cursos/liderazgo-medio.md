@@ -13,9 +13,9 @@ temario:
   - Resolución de conflictos
 duracion: A tu ritmo · online
 precio:
-  ars: 140000
-  usd: 93
-orden: 3
+  ars: 155000
+  usd: 100
+orden: 10
 publicado: true
 destacado: false
 ---

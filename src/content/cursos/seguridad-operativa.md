@@ -14,12 +14,13 @@ temario:
   - Permisos de trabajo
   - Lecciones aprendidas
   - Procedimientos operativos
-  - Roles de empleo
+  - Plan de contingencias
+  - Excelencia operacional
 duracion: A tu ritmo · online
 precio:
-  ars: 180000
-  usd: 120
-orden: 5
+  ars: 140000
+  usd: 90
+orden: 9
 publicado: true
 destacado: false
 ---
