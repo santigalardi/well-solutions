@@ -69,6 +69,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       email: pago.metadata?.alumno_email ?? pago.payer?.email,
       nombre: alumnoNombre ?? pago.payer?.first_name,
       apellido: alumnoNombre ? '' : pago.payer?.last_name,
+      telefono: pago.metadata?.alumno_telefono ?? '',
       cursoId: pago.external_reference,
       cursoTitulo: pago.metadata?.curso_titulo,
       monto: pago.transaction_amount,

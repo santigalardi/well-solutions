@@ -23,7 +23,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return json({ error: 'Mercado Pago no está configurado.' }, 500);
   }
 
-  let body: { cursoId?: string; nombre?: string; email?: string };
+  let body: { cursoId?: string; nombre?: string; email?: string; telefono?: string };
   try {
     body = await request.json();
   } catch {
@@ -40,6 +40,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
   if (!nombre) return json({ error: 'Falta el nombre.' }, 400);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json({ error: 'Email inválido.' }, 400);
+  }
+  const telefono = (body.telefono ?? '').trim().slice(0, 25);
+  if (!/^[+\d][\d\s().-]{5,}$/.test(telefono)) {
+    return json({ error: 'Teléfono inválido.' }, 400);
   }
 
   const curso = await getCursoById(cursoId);
@@ -80,6 +84,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       curso_titulo: curso.data.titulo,
       alumno_nombre: nombre,
       alumno_email: email,
+      alumno_telefono: telefono,
     },
   };
 
