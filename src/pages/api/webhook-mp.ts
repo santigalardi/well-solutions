@@ -61,10 +61,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const pago = (await res.json()) as any;
 
   if (pago.status === 'approved') {
+    // Para el alta mandan los datos que el alumno cargó en el formulario
+    // del sitio (metadata.alumno_*); los del pagador de MP son fallback
+    // (compras viejas o preferencia creada sin formulario).
+    const alumnoNombre = pago.metadata?.alumno_nombre;
     const contacto = {
-      email: pago.payer?.email,
-      nombre: pago.payer?.first_name,
-      apellido: pago.payer?.last_name,
+      email: pago.metadata?.alumno_email ?? pago.payer?.email,
+      nombre: alumnoNombre ?? pago.payer?.first_name,
+      apellido: alumnoNombre ? '' : pago.payer?.last_name,
       cursoId: pago.external_reference,
       cursoTitulo: pago.metadata?.curso_titulo,
       monto: pago.transaction_amount,

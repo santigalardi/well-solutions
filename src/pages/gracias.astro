@@ -46,11 +46,21 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <script>
-  // Variante "pago pendiente" según query param.
-  if (new URLSearchParams(location.search).get('estado') === 'pendiente') {
+  // Variante "pago pendiente" y email de alta según query params.
+  const params = new URLSearchParams(location.search);
+  const pendiente = params.get('estado') === 'pendiente';
+  const email = params.get('email');
+
+  if (pendiente) {
     document.querySelector('[data-icono]')!.textContent = '⏳';
     document.querySelector('[data-titulo]')!.textContent = 'Tu pago está en proceso';
-    document.querySelector('[data-mensaje]')!.textContent =
-      'En cuanto se acredite el pago, te damos de alta en el aula y recibís el acceso por email.';
   }
+
+  const mensaje = document.querySelector('[data-mensaje]')!;
+  const base = pendiente
+    ? 'En cuanto se acredite el pago, te damos de alta en el aula'
+    : 'Recibimos tu pago. En breve te damos de alta en el aula online';
+  mensaje.textContent = email
+    ? `${base} y te llega la invitación a ${email}. Revisá también spam/promociones.`
+    : `${base} y te llega el acceso por email.`;
 </script>

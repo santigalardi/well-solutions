@@ -1,10 +1,14 @@
 ---
 /*
-  Botón de compra. Es la única "isla" con lógica: al hacer clic llama a
-  /api/checkout, que crea la preferencia en Mercado Pago del lado del
-  servidor y devuelve la URL de pago (init_point). Redirige ahí.
+  Botón de compra. Al hacer clic abre un mini formulario (nombre + email)
+  y recién ahí llama a /api/checkout, que crea la preferencia en Mercado
+  Pago del lado del servidor y devuelve la URL de pago (init_point).
 
-  Usa JS vanilla — no necesitamos un framework para esto.
+  El email que carga acá el alumno es el que usamos para el alta en el
+  aula (Skool) — NO dependemos del email de la cuenta de MP del pagador,
+  que puede ser de otra persona (paga la empresa, la pareja, etc.).
+
+  Usa JS vanilla y <dialog> nativo — no necesitamos un framework.
 */
 interface Props {
   cursoId: string;
@@ -16,29 +20,100 @@ const { cursoId, titulo } = Astro.props;
 <button
   type="button"
   data-curso-id={cursoId}
-  data-curso-titulo={titulo}
   class="boton-comprar w-full rounded-xl bg-brand-600 px-6 py-4 text-center text-base font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
 >
   Comprar e inscribirme
 </button>
-<p class="boton-comprar-error mt-2 hidden text-center text-sm text-red-600"></p>
+
+<dialog
+  class="dialogo-compra m-auto w-[calc(100vw-2rem)] max-w-md rounded-2xl border border-brand-200 bg-white p-0 shadow-2xl backdrop:bg-brand-950/60 backdrop:backdrop-blur-sm"
+>
+  <form method="dialog" class="p-7">
+    <p class="spec-label text-slate-400">Inscripción</p>
+    <h3 class="mt-2 font-display text-xl font-bold text-brand-900">{titulo}</h3>
+    <p class="mt-2 text-sm text-slate-500">
+      Contanos a quién damos de alta en el aula. Después seguís al pago
+      seguro en Mercado Pago.
+    </p>
+
+    <label class="mt-5 block">
+      <span class="text-sm font-semibold text-brand-900">Nombre y apellido</span>
+      <input
+        type="text"
+        name="nombre"
+        required
+        maxlength="120"
+        autocomplete="name"
+        placeholder="Ej: María Rodríguez"
+        class="mt-1.5 w-full rounded-xl border border-brand-200 px-4 py-3 text-slate-800 outline-none transition placeholder:text-slate-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30"
+      />
+    </label>
+
+    <label class="mt-4 block">
+      <span class="text-sm font-semibold text-brand-900">Email para recibir el acceso</span>
+      <input
+        type="email"
+        name="email"
+        required
+        maxlength="254"
+        autocomplete="email"
+        placeholder="tu@email.com"
+        class="mt-1.5 w-full rounded-xl border border-brand-200 px-4 py-3 text-slate-800 outline-none transition placeholder:text-slate-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30"
+      />
+      <span class="mt-1.5 block text-xs text-slate-400">
+        A este correo te llega la invitación al aula online.
+      </span>
+    </label>
+
+    <p class="error-compra mt-3 hidden text-sm text-red-600"></p>
+
+    <div class="mt-6 flex gap-3">
+      <button
+        type="button"
+        class="cancelar-compra rounded-xl border border-brand-200 px-5 py-3 text-sm font-semibold text-slate-500 transition hover:border-brand-300 hover:text-brand-700"
+      >
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        class="confirmar-compra flex-1 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        Continuar al pago →
+      </button>
+    </div>
+  </form>
+</dialog>
 
 <script>
   document.querySelectorAll<HTMLButtonElement>('.boton-comprar').forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const errorEl = btn.parentElement?.querySelector<HTMLElement>('.boton-comprar-error');
-      errorEl?.classList.add('hidden');
-      const original = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Redirigiendo a Mercado Pago…';
+    const dialogo = btn.parentElement?.querySelector<HTMLDialogElement>('.dialogo-compra');
+    if (!dialogo) return;
 
+    const form = dialogo.querySelector('form')!;
+    const errorEl = dialogo.querySelector<HTMLElement>('.error-compra')!;
+    const confirmar = dialogo.querySelector<HTMLButtonElement>('.confirmar-compra')!;
+
+    btn.addEventListener('click', () => dialogo.showModal());
+    dialogo
+      .querySelector('.cancelar-compra')!
+      .addEventListener('click', () => dialogo.close());
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+      confirmar.disabled = true;
+      const original = confirmar.textContent;
+      confirmar.textContent = 'Redirigiendo a Mercado Pago…';
+
+      const datos = new FormData(form);
       try {
         const res = await fetch('/api/checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             cursoId: btn.dataset.cursoId,
-            titulo: btn.dataset.cursoTitulo,
+            nombre: String(datos.get('nombre') ?? '').trim(),
+            email: String(datos.get('email') ?? '').trim(),
           }),
         });
         if (!res.ok) throw new Error('No se pudo iniciar el pago');
@@ -46,13 +121,11 @@ const { cursoId, titulo } = Astro.props;
         if (!data.initPoint) throw new Error('Respuesta inválida del servidor');
         window.location.href = data.initPoint;
       } catch (err) {
-        btn.disabled = false;
-        btn.textContent = original;
-        if (errorEl) {
-          errorEl.textContent =
-            'Hubo un problema al iniciar el pago. Probá de nuevo o escribinos.';
-          errorEl.classList.remove('hidden');
-        }
+        confirmar.disabled = false;
+        confirmar.textContent = original;
+        errorEl.textContent =
+          'Hubo un problema al iniciar el pago. Probá de nuevo o escribinos por WhatsApp.';
+        errorEl.classList.remove('hidden');
         console.error(err);
       }
     });

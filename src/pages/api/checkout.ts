@@ -23,7 +23,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return json({ error: 'Mercado Pago no está configurado.' }, 500);
   }
 
-  let body: { cursoId?: string };
+  let body: { cursoId?: string; nombre?: string; email?: string };
   try {
     body = await request.json();
   } catch {
@@ -32,6 +32,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const cursoId = body.cursoId;
   if (!cursoId) return json({ error: 'Falta cursoId.' }, 400);
+
+  // Datos del alumno para el alta en el aula (los pide el formulario del
+  // sitio; no dependemos del email de la cuenta de MP del pagador).
+  const nombre = (body.nombre ?? '').trim().slice(0, 120);
+  const email = (body.email ?? '').trim().slice(0, 254);
+  if (!nombre) return json({ error: 'Falta el nombre.' }, 400);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return json({ error: 'Email inválido.' }, 400);
+  }
 
   const curso = await getCursoById(cursoId);
   if (!curso) return json({ error: 'Curso no encontrado.' }, 404);
@@ -48,10 +57,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
       },
     ],
     back_urls: {
-      success: `${siteUrl}/gracias?curso=${curso.id}`,
+      success: `${siteUrl}/gracias?curso=${curso.id}&email=${encodeURIComponent(email)}`,
       failure: `${siteUrl}/cursos/${curso.id}?pago=error`,
-      pending: `${siteUrl}/gracias?curso=${curso.id}&estado=pendiente`,
+      pending: `${siteUrl}/gracias?curso=${curso.id}&estado=pendiente&email=${encodeURIComponent(email)}`,
     },
+    // Prellena el checkout de MP (el comprador puede cambiarlo si paga otro).
+    payer: { name: nombre, email },
     // auto_return exige back_urls HTTPS; en dev local (http) MP lo rechaza.
     ...(siteUrl.startsWith('https://') ? { auto_return: 'approved' } : {}),
     // Sin esto MP no notifica al webhook: hay que declararlo por preferencia
@@ -62,7 +73,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
       : {}),
     // Referencia para reconciliar el pago en el webhook.
     external_reference: curso.id,
-    metadata: { curso_id: curso.id, curso_titulo: curso.data.titulo },
+    // alumno_* son la fuente de verdad para el alta (el webhook los
+    // prioriza sobre los datos del pagador de MP).
+    metadata: {
+      curso_id: curso.id,
+      curso_titulo: curso.data.titulo,
+      alumno_nombre: nombre,
+      alumno_email: email,
+    },
   };
 
   const res = await fetch('https://api.mercadopago.com/checkout/preferences', {
