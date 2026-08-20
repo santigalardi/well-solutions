@@ -15,10 +15,8 @@
   },
   // Dominios del sitio. El singular (wellsolution.com.ar) redirige acá
   // vía Redirect Rule en su zona; www vía regla WWW→root en esta zona.
-  // ⚠️ Descomentar recién después de desenganchar estos dominios del
-  // proyecto de Pages (Custom domains), si no el deploy falla por conflicto.
-  // "routes": [
-  //   { "pattern": "wellsolutions.com.ar", "custom_domain": true },
-  //   { "pattern": "www.wellsolutions.com.ar", "custom_domain": true }
-  // ]
+  "routes": [
+    { "pattern": "wellsolutions.com.ar", "custom_domain": true },
+    { "pattern": "www.wellsolutions.com.ar", "custom_domain": true }
+  ]
 }
