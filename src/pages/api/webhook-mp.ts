@@ -5,20 +5,17 @@ export const prerender = false;
 /*
   Webhook de Mercado Pago. MP lo llama cuando cambia el estado de un pago.
   Acá confirmamos el pago contra la API de MP y, si está aprobado, se lo
-  pasamos a GoHighLevel (inbound webhook) para que quede el contacto/venta
-  en el CRM. Desde GHL se automatiza el aviso a José, que da de alta al
+  reenviamos a Make (escenario "Well Solutions - Ventas MP"), que registra
+  la venta en el Sheet y manda el mail de aviso a José, quien da de alta al
   alumno en Skool (paso manual, como se acordó con el cliente).
 
   Si MP_WEBHOOK_SECRET está configurado, se valida la firma x-signature
   (la clave se saca del panel de la app en MP al configurar el webhook).
-
-  TODO cuando esté GHL definido:
-    - Mapear los campos al formato del inbound webhook de GHL.
 */
 export const POST: APIRoute = async ({ request, locals }) => {
   const env = (locals as any).runtime?.env ?? {};
   const accessToken = env.MP_ACCESS_TOKEN ?? import.meta.env.MP_ACCESS_TOKEN;
-  const ghlWebhookUrl = env.GHL_WEBHOOK_URL ?? import.meta.env.GHL_WEBHOOK_URL;
+  const makeWebhookUrl = env.MAKE_WEBHOOK_URL ?? import.meta.env.MAKE_WEBHOOK_URL;
   const webhookSecret = env.MP_WEBHOOK_SECRET ?? import.meta.env.MP_WEBHOOK_SECRET;
 
   let payload: any;
@@ -77,15 +74,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
       fecha: pago.date_approved,
     };
 
-    if (ghlWebhookUrl) {
-      await fetch(ghlWebhookUrl, {
+    if (makeWebhookUrl) {
+      await fetch(makeWebhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(contacto),
-      }).catch((e) => console.error('Error enviando a GHL:', e));
+      }).catch((e) => console.error('Error enviando a Make:', e));
     } else {
-      // Sin GHL configurado todavía: al menos lo dejamos en logs.
-      console.log('Pago aprobado (GHL no configurado):', contacto);
+      // Sin Make configurado todavía: al menos lo dejamos en logs.
+      console.log('Pago aprobado (Make no configurado):', contacto);
     }
   }
 
