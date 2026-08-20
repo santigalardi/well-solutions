@@ -1,0 +1,24 @@
+{
+  // Config del Worker (migrado desde Cloudflare Pages, ago 2026).
+  // El adapter de Astro genera el worker en dist/_worker.js; los
+  // estáticos pre-renderizados se sirven como assets desde dist/.
+  "name": "well-solutions",
+  "main": "./dist/_worker.js/index.js",
+  "compatibility_date": "2026-08-19",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // Dominios del sitio. El singular (wellsolution.com.ar) redirige acá
+  // vía Redirect Rule en su zona; www vía regla WWW→root en esta zona.
+  // ⚠️ Descomentar recién después de desenganchar estos dominios del
+  // proyecto de Pages (Custom domains), si no el deploy falla por conflicto.
+  // "routes": [
+  //   { "pattern": "wellsolutions.com.ar", "custom_domain": true },
+  //   { "pattern": "www.wellsolutions.com.ar", "custom_domain": true }
+  // ]
+}
