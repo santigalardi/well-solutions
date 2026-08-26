@@ -6,12 +6,14 @@ resumen: >-
   comunicaciones, monitoreo y diagnóstico en tiempo real, y el rol del
   supervisor de sala.
 temario:
-  - Entornos colaborativos de operación
-  - Instrumentación y comunicaciones
-  - Monitoreo y diagnóstico de pozos en tiempo real
-  - Gestión de alarmas y alertas operativas
-  - Coordinación sala–campo
-  - El rol del supervisor de sala de control
+  - Fundamentos
+  - Monitoreo integral de producción
+  - Vigilancia de pozos (well surveillance)
+  - Optimización de producción
+  - Gestión de alarmas y eventos
+  - Integridad operacional y seguridad de procesos
+  - Gestión de pérdidas y disponibilidad
+  - Coordinación de operaciones de campo
 duracion: A tu ritmo · online
 precio:
   ars: 140000

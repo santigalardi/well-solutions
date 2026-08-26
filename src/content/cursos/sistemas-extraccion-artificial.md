@@ -6,14 +6,14 @@ resumen: >-
   alcanza: bombeo mecánico, plunger lift, gas lift y otros SEA, con criterio
   de selección y operación.
 temario:
-  - Introducción a los sistemas de extracción artificial
+  - Análisis FODA
+  - SEA en Vaca Muerta
+  - Gas lift
   - Bombeo mecánico
   - Plunger lift
-  - Gas lift
-  - Otros sistemas de extracción (PCP, electrosumergible)
-  - Criterios de selección por tipo de pozo
-  - Extracción artificial en No Convencionales
-  - Optimización y diagnóstico
+  - BES (bombeo electrosumergible)
+  - Otros SEA
+  - Estrategia de explotación
 duracion: A tu ritmo · online
 precio:
   ars: 140000

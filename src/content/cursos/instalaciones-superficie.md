@@ -6,13 +6,14 @@ resumen: >-
   colectores, ductos, separadores y equipos de proceso, hasta la lectura de
   P&ID.
 temario:
-  - Pozos, satélites y baterías
-  - Colectores y ductos
-  - Compresores de gas
-  - Separadores de control (bifásicos, trifásicos, multifásicos)
-  - Equipos de proceso (bombas, válvulas, instrumentos)
-  - Facilidades de producción temporales en zonas alejadas
-  - Lectura de P&ID
+  - Boca de pozo
+  - Separadores
+  - Tanques
+  - Bombas
+  - KOD
+  - Flare
+  - Compresores
+  - Servicios
 duracion: A tu ritmo · online
 precio:
   ars: 125000

@@ -6,12 +6,14 @@ resumen: >-
   fractura hidráulica, limpieza de pozos y ensayos, con foco en el
   desarrollo de campos No Convencionales.
 temario:
-  - Introducción a los reservorios
-  - Exploración y explotación de campos petroleros
-  - Estructuras de desarrollo en No Convencionales
-  - Fractura hidráulica
-  - Limpieza de pozos
-  - Ensayos de pozo
+  - Historia
+  - Equipo de perforación
+  - Columna de perforación
+  - Sistema de circulación
+  - Sistema de rotación
+  - Entubación
+  - Cementación
+  - Terminación
 duracion: A tu ritmo · online
 precio:
   ars: 125000

@@ -6,16 +6,14 @@ resumen: >-
   análisis y gestión del riesgo, reglas de oro y permisos de trabajo, para
   operar bajo los más altos estándares.
 temario:
-  - Identificación de peligros
-  - Análisis de riesgos
-  - Gestión del riesgo
-  - Planificación de tareas basada en el riesgo
-  - Reglas de oro
-  - Permisos de trabajo
-  - Lecciones aprendidas
-  - Procedimientos operativos
-  - Plan de contingencias
-  - Excelencia operacional
+  - Liderazgo y cultura HSE
+  - Gestión de riesgos operacionales
+  - Seguridad de procesos
+  - Operaciones seguras en campo
+  - Salud ocupacional e higiene industrial
+  - Gestión ambiental
+  - Preparación y respuesta ante emergencias
+  - Desempeño, auditoría y mejora continua
 duracion: A tu ritmo · online
 precio:
   ars: 140000

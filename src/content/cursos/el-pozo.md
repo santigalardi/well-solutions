@@ -6,12 +6,14 @@ resumen: >-
   puentes de producción. El modelo mental que todo operador necesita antes
   de tocar una válvula.
 temario:
-  - El pozo surgente
-  - Flujo vertical
-  - Arbolitos de producción
+  - Reservorios
+  - Características de Vaca Muerta
+  - Surgencia natural
+  - Índice de producción
   - Puentes de producción
-  - Presiones y variables del pozo
-  - El pozo en No Convencionales
+  - Control de producción
+  - Tratamientos químicos
+  - Reparaciones y mantenimiento
 duracion: A tu ritmo · online
 precio:
   ars: 125000

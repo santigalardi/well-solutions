@@ -6,11 +6,14 @@ resumen: >-
   planificación efectiva, delegación y resolución de conflictos para liderar
   equipos de operación.
 temario:
-  - Inteligencia emocional
-  - Comunicación efectiva
-  - Planificación efectiva
-  - Delegación de tareas
-  - Resolución de conflictos
+  - Estructuras corporativas
+  - Tipos de liderazgo
+  - Liderazgo operacional
+  - Seguridad como valor de liderazgo
+  - Comunicación efectiva en operaciones
+  - Gestión del desempeño y KPIs
+  - Toma de decisiones en contextos de incertidumbre
+  - Liderazgo para la excelencia operacional
 duracion: A tu ritmo · online
 precio:
   ars: 155000

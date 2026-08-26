@@ -6,12 +6,14 @@ resumen: >-
   barreras de seguridad, control de variables críticas, mejora continua e
   investigación de incidentes.
 temario:
-  - Identificación y evaluación de riesgo de procesos
-  - Gestión de barreras de seguridad
-  - Control de variables críticas
-  - Proceso de mejora continua
-  - Investigación de incidentes
-  - Lecciones aprendidas de la industria
+  - Fundamentos
+  - Identificación de peligros y análisis de riesgo
+  - Integridad mecánica y gestión de activos
+  - Gestión del cambio
+  - Sistemas de seguridad y control
+  - Operaciones seguras y control de energías peligrosas
+  - Investigación de incidentes y aprendizaje
+  - Preparación y respuesta a emergencias
 duracion: A tu ritmo · online
 precio:
   ars: 140000

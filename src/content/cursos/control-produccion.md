@@ -6,12 +6,14 @@ resumen: >-
   por excepción y algoritmos aplicados al control de producción en tiempo
   real.
 temario:
-  - Modelos de control de producción
-  - Mediciones físicas y calidad del dato
-  - Manejo por excepción
-  - Algoritmos de control y diagnóstico
-  - Acciones correctivas remotas y automatizadas
-  - Integración con salas de control
+  - Producción contable
+  - Mediciones físicas
+  - Monitoreo
+  - Gestión de pérdidas de producción
+  - Integridad de pozos
+  - Control de performance y mejora continua
+  - Gestión de drawdown y choke
+  - Análisis nodal
 duracion: A tu ritmo · online
 precio:
   ars: 125000

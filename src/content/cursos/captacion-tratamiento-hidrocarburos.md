@@ -6,12 +6,14 @@ resumen: >-
   crudo y agua. Deshidratación, captación de vapores, control de proceso y
   especificaciones de venta.
 temario:
-  - Baterías de captación primaria
-  - Planta de tratamiento de gas (deshidratación, venta, GLP)
-  - Planta de tratamiento de crudo (captación de vapores, control de proceso)
-  - Tratamiento de agua de producción e inyección
-  - Controles y balance de producción
-  - Especificaciones de venta de gas y petróleo
+  - Ductos y colectores
+  - Satélites y baterías
+  - PTC (planta de tratamiento de crudo)
+  - PTG (planta de tratamiento de gas)
+  - PIAs
+  - Sumideros
+  - ULAC
+  - Comerciales
 duracion: A tu ritmo · online
 precio:
   ars: 125000
