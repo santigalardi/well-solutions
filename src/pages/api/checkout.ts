@@ -49,6 +49,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const curso = await getCursoById(cursoId);
   if (!curso) return json({ error: 'Curso no encontrado.' }, 404);
 
+  // MODO PRUEBA: si PRECIO_PRUEBA_ARS está seteado (wrangler.jsonc), se
+  // cobra ese monto en vez del precio real. Sacar la var y redeployar
+  // para volver a cobrar los precios de los cursos.
+  const precioPrueba = Number(env.PRECIO_PRUEBA_ARS ?? import.meta.env.PRECIO_PRUEBA_ARS);
+  const precioArs = precioPrueba > 0 ? precioPrueba : curso.data.precio.ars;
+
   // Preferencia de pago. Precio y título tomados del contenido (fuente de verdad).
   const preference = {
     items: [
@@ -56,7 +62,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         id: curso.id,
         title: curso.data.titulo,
         quantity: 1,
-        unit_price: curso.data.precio.ars,
+        unit_price: precioArs,
         currency_id: 'ARS',
       },
     ],

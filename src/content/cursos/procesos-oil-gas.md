@@ -21,7 +21,7 @@ precio:
   ars: 90000
   usd: 60
 orden: 1
-publicado: false
+publicado: true
 destacado: false
 ---
 

@@ -13,6 +13,11 @@
   "observability": {
     "enabled": true
   },
+  // TEMPORAL — prueba de compra real: el checkout cobra $1 ARS en vez del
+  // precio del curso. BORRAR esta sección y redeployar tras la prueba.
+  "vars": {
+    "PRECIO_PRUEBA_ARS": "1"
+  },
   // Dominios del sitio. El singular (wellsolution.com.ar) redirige acá
   // vía Redirect Rule en su zona; www vía regla WWW→root en esta zona.
   "routes": [
