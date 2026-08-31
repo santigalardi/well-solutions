@@ -84,16 +84,16 @@ En `src/lib/dolar.ts` y `scripts/actualizar-precios.mjs`:
   menos seguido; bajar a `0.01` para que siga más de cerca al dólar.
 - `REDONDEO_ARS = 5000` → cambiar a `10000` para números más redondos.
 
-## Setup pendiente (una sola vez)
+## Setup (ya hecho)
 
-Para que el deploy automático funcione, cargar en GitHub →
-**Settings → Secrets and variables → Actions**:
+Los secrets `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` están cargados
+en GitHub → *Settings → Secrets and variables → Actions*, y el deploy
+automático quedó verificado el 31/8/2026 (run #1, exitoso).
 
-- `CLOUDFLARE_API_TOKEN` — token con permiso *Edit Cloudflare Workers*
-- `CLOUDFLARE_ACCOUNT_ID` — ID de la cuenta de Cloudflare
-
-Sin esos secrets el cálculo de precios igual funciona en cada build
-manual; lo único que falta es que se publique solo.
+El token es `github-actions-precios`, creado con la plantilla *Edit
+Cloudflare Workers* sobre la cuenta DigitalYa. Si alguna vez hay que
+revocarlo, se hace desde dash.cloudflare.com/profile/api-tokens sin
+afectar los deploys manuales.
 
 ## Red de seguridad: modo prueba
 
