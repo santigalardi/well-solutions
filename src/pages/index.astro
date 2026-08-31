@@ -5,6 +5,8 @@ import Base from '../layouts/Base.astro';
 import CursoCard from '../components/CursoCard.astro';
 import VideoLite from '../components/VideoLite.astro';
 import flyer from '../assets/flyer-vaca-muerta.png';
+import modalidadPresencial from '../assets/modalidad-presencial.png';
+import modalidadOnline from '../assets/modalidad-online.png';
 
 const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
   .sort((a, b) => a.data.orden - b.data.orden);
@@ -55,7 +57,7 @@ const social = {
   whatsapp: 'https://wa.me/5492995335935',
   // Grupo de la academia (distinto del WhatsApp directo de José).
   grupoWhatsapp: 'https://chat.whatsapp.com/FvDg4CV1NinDznoKKP1dKd',
-  email: 'Wellsolutionadvisor@gmail.com',
+  email: 'academia@wellsolutions.com.ar',
 };
 ---
 
@@ -453,9 +455,42 @@ const social = {
             desarrollar capacidades que generen valor real en la operación.
           </p>
 
-          <p class="mt-5 text-lg text-brand-100">
-            Modalidad <strong class="font-semibold text-white">presencial y online</strong>.
-          </p>
+          <!-- Modalidades, con foto real de cada una -->
+          <div class="mt-8 grid gap-6 sm:grid-cols-2">
+            <figure class="overflow-hidden rounded-xl border border-white/15 bg-brand-900/40">
+              <Image
+                src={modalidadPresencial}
+                alt="Capacitación presencial en campo: equipo de Well Solutions frente a un pozo en Neuquén"
+                class="aspect-[3/2] w-full object-cover"
+                widths={[400, 800]}
+                sizes="(min-width: 640px) 400px, 100vw"
+                loading="lazy"
+              />
+              <figcaption class="px-5 py-4">
+                <p class="font-display text-lg font-bold text-white">Presencial</p>
+                <p class="mt-1 text-sm leading-relaxed text-brand-100/90">
+                  Capacitación en campo, en tus instalaciones y con tus equipos.
+                </p>
+              </figcaption>
+            </figure>
+
+            <figure class="overflow-hidden rounded-xl border border-white/15 bg-brand-900/40">
+              <Image
+                src={modalidadOnline}
+                alt="Clase online en vivo en el aula virtual de Well Solutions"
+                class="aspect-[3/2] w-full object-cover"
+                widths={[400, 800]}
+                sizes="(min-width: 640px) 400px, 100vw"
+                loading="lazy"
+              />
+              <figcaption class="px-5 py-4">
+                <p class="font-display text-lg font-bold text-white">Online</p>
+                <p class="mt-1 text-sm leading-relaxed text-brand-100/90">
+                  Aula virtual con clases en vivo, material y seguimiento del progreso.
+                </p>
+              </figcaption>
+            </figure>
+          </div>
 
           <p class="mt-6 font-display text-xl font-bold text-cyan-400 sm:text-2xl">
             Tu necesidad. Nuestro know-how. Una solución de formación a medida.
