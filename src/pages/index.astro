@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import CursoCard from '../components/CursoCard.astro';
 import VideoLite from '../components/VideoLite.astro';
+import flyer from '../assets/flyer-vaca-muerta.png';
 
 const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
   .sort((a, b) => a.data.orden - b.data.orden);
@@ -78,20 +80,21 @@ const social = {
         </div>
 
         <h1
-          class="rise mt-6 font-display text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl xl:text-7xl"
+          class="rise mt-6 font-display text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl xl:text-5xl"
           style="animation-delay: 80ms"
         >
-          Del yacimiento a la
-          <span class="relative whitespace-nowrap text-cyan-400">
-            sala de control.
+          Bienvenidos a Well Solutions
+          <span class="relative inline-block text-cyan-400">
+            Academia de formación en Oil y Gas
             <span class="draw-line absolute -bottom-2 left-0 h-1 w-full bg-cyan-400/60" style="animation-delay: 700ms"></span>
           </span>
         </h1>
 
         <p class="rise mt-8 max-w-xl text-lg text-brand-100/80 sm:text-xl" style="animation-delay: 160ms">
-          Formate en operaciones petroleras con quienes estuvieron en el campo.
-          <strong class="font-semibold text-white">20 años de know-how</strong> en
-          Vaca Muerta, ahora en una academia online, dinámica y a tu ritmo.
+          <strong class="font-semibold text-white">20 años de experiencia. Conocimiento para la industria que viene.</strong>
+          Una plataforma de formación especializada en Oil &amp; Gas que integra
+          conocimiento técnico, evolución tecnológica y comunidad profesional para
+          desarrollar las capacidades que demanda la industria energética actual.
         </p>
 
         <div class="rise mt-10 flex flex-col gap-4 sm:flex-row" style="animation-delay: 240ms">
@@ -111,36 +114,26 @@ const social = {
         </div>
       </div>
 
-      <!-- Foto real de campo, enmarcada como registro de plano -->
-      <figure class="rise relative hidden lg:block" style="animation-delay: 320ms">
+      <!-- Flyer de la academia, enmarcado como registro de plano.
+           Sin gradiente encima: la pieza tiene texto y taparlo la haría
+           ilegible (a diferencia de la foto de campo que había antes). -->
+      <figure class="rise relative mx-auto hidden max-w-[430px] lg:block" style="animation-delay: 320ms">
         <div id="hero-tilt" class="hero-tilt float-soft">
           <div class="corner-ticks relative border border-white/15 bg-brand-900/40 p-3 backdrop-blur-sm">
             <div class="relative overflow-hidden">
-              <img
-                src="/campo/equipo-campo.jpg"
-                alt="Equipo de intervención de pozo en campo, Neuquén"
-                class="w-full object-cover"
-                width="839"
-                height="839"
+              <Image
+                src={flyer}
+                alt="Formación online en Petróleo y Gas — yacimientos no convencionales, Vaca Muerta, Neuquén"
+                class="w-full"
+                widths={[430, 860]}
+                sizes="430px"
                 loading="eager"
                 fetchpriority="high"
               />
-              <!-- Blend hacia el navy del fondo para integrar la foto -->
-              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/70 via-transparent to-brand-950/20"></div>
               <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"></div>
             </div>
           </div>
-
-          <!-- Sello flotante -->
-          <div class="pop-in absolute -left-6 -top-6 rounded-xl border border-cyan-400/30 bg-brand-950/90 px-5 py-3 shadow-xl shadow-brand-950/50 backdrop-blur" style="animation-delay: 900ms">
-            <p class="font-display text-3xl font-extrabold leading-none text-cyan-400">+20</p>
-            <p class="spec-label mt-1 text-brand-100/60">años en campo</p>
-          </div>
         </div>
-        <figcaption class="mt-3 flex items-center justify-between">
-          <span class="spec-label text-brand-100/50">Registro de campo · Neuquén</span>
-          <span class="spec-label text-cyan-400">FIG. 01</span>
-        </figcaption>
       </figure>
     </div>
 
