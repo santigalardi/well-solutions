@@ -94,3 +94,15 @@ Para que el deploy automático funcione, cargar en GitHub →
 
 Sin esos secrets el cálculo de precios igual funciona en cada build
 manual; lo único que falta es que se publique solo.
+
+## Red de seguridad: modo prueba
+
+El workflow **no deploya** si `PRECIO_PRUEBA_ARS` sigue en `wrangler.jsonc`.
+
+Esa variable hace que el checkout cobre $1 en vez del precio real (se usa
+para probar una compra de punta a punta). Sin este chequeo, el deploy
+diario la dejaría viva en producción sin que nadie lo note: la web
+mostrando $125.000 y Mercado Pago cobrando $1.
+
+Si el workflow falla con ese error, la solución es sacar el bloque `vars`
+de `wrangler.jsonc` y volver a correrlo.

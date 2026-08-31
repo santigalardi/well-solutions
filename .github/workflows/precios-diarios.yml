@@ -31,10 +31,23 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - run: npm ci
+
+      # Red de seguridad: mientras el modo prueba esté puesto, el checkout
+      # cobra $1 en vez del precio real. Si estuviera activo, un deploy
+      # automático lo dejaría vivo en producción sin que nadie lo note.
+      # Preferimos que el workflow falle y avise por mail.
+      - name: Verificar que no esté el modo prueba de $1
+        run: |
+          if grep -q 'PRECIO_PRUEBA_ARS' wrangler.jsonc; then
+            echo "::error::PRECIO_PRUEBA_ARS sigue en wrangler.jsonc — el checkout cobra \$1."
+            echo "::error::Sacá esa var de wrangler.jsonc antes de dejar correr el deploy automático."
+            exit 1
+          fi
+          echo "OK: sin modo prueba, el checkout cobra los precios reales."
 
       # El hook "prebuild" actualiza los .md antes de compilar.
       - name: Build (actualiza precios y compila)
