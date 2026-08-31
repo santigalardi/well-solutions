@@ -1,10 +1,11 @@
 ---
-titulo: Sala de Control
+titulo: Salas de Control
 nivel: avanzado
 resumen: >-
-  El cerebro de la operación: entornos colaborativos, instrumentación y
-  comunicaciones, monitoreo y diagnóstico en tiempo real, y el rol del
-  supervisor de sala.
+  Descubrí cómo el monitoreo en tiempo real y la operación remota transforman
+  Oil y Gas. Aprendé sobre salas de control, manejo por excepción y análisis
+  de datos para anticipar desvíos, reducir riesgos y optimizar el rendimiento
+  de los activos.
 temario:
   - Fundamentos
   - Monitoreo integral de producción

@@ -1,10 +1,12 @@
 ---
-titulo: Sistemas de Extracción Artificial
+titulo: Artificial Lift · Sistemas de Levantamiento Artificial
 nivel: intermedio
 resumen: >-
-  Los sistemas que mantienen el pozo produciendo cuando la surgencia no
-  alcanza: bombeo mecánico, plunger lift, gas lift y otros SEA, con criterio
-  de selección y operación.
+  Aprendé los fundamentos del Artificial Lift y las principales tecnologías
+  aplicadas a pozos de petróleo y gas: bombeo mecánico, Gas Lift y Plunger
+  Lift. Conocé sus criterios de selección, operación y optimización para
+  mejorar la eficiencia y maximizar la producción en yacimientos
+  convencionales y no convencionales.
 temario:
   - Análisis FODA
   - SEA en Vaca Muerta

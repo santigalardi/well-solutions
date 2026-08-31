@@ -1,10 +1,11 @@
 ---
-titulo: Seguridad de Procesos
+titulo: Seguridad de Procesos Basada en el Riesgo
 nivel: avanzado
 resumen: >-
-  Prevenir el incidente mayor: identificación y evaluación de riesgo,
-  barreras de seguridad, control de variables críticas, mejora continua e
-  investigación de incidentes.
+  Aprendé los principios de Seguridad de Procesos aplicados a Oil y Gas,
+  priorizando la seguridad del operario como valor fundamental. Identificá
+  peligros, evaluá riesgos y aplicá barreras preventivas para proteger a las
+  personas, las instalaciones y asegurar la continuidad operativa.
 temario:
   - Fundamentos
   - Identificación de peligros y análisis de riesgo

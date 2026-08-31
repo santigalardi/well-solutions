@@ -1,10 +1,12 @@
 ---
-titulo: El Pozo
+titulo: El Pozo Surgente
 nivel: principiante
 resumen: >-
-  El pozo como sistema: surgencia natural, flujo vertical, arbolitos y
-  puentes de producción. El modelo mental que todo operador necesita antes
-  de tocar una válvula.
+  Descubrirás cómo evolucionan los pozos petroleros y gasíferos desde el
+  inicio de la producción hasta su declinación, incluyendo intervenciones,
+  optimización y adaptación de instalaciones. Un curso práctico para
+  comprender el ciclo completo de vida de un pozo surgente y su importancia en
+  la operación eficiente de los yacimientos.
 temario:
   - Reservorios
   - Características de Vaca Muerta

@@ -1,10 +1,11 @@
 ---
-titulo: Controlar Producción (Modelos de Control)
+titulo: Control de Producción · Unidad de Negocio
 nivel: avanzado
 resumen: >-
-  Los modelos de control de la operación moderna: mediciones físicas, manejo
-  por excepción y algoritmos aplicados al control de producción en tiempo
-  real.
+  Aprendé a analizar e interpretar datos de producción mediante indicadores,
+  tendencias, balances y control de pérdidas. Transformá datos operativos en
+  información estratégica para optimizar la eficiencia, la rentabilidad y la
+  toma de decisiones en Oil y Gas.
 temario:
   - Producción contable
   - Mediciones físicas

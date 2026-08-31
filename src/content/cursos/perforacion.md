@@ -2,9 +2,10 @@
 titulo: Perforación
 nivel: principiante
 resumen: >-
-  Cómo se construye un pozo: del reservorio a los ensayos. Reservorios,
-  fractura hidráulica, limpieza de pozos y ensayos, con foco en el
-  desarrollo de campos No Convencionales.
+  Aprendé los conceptos, procesos, equipos y mejores prácticas utilizados en
+  yacimientos shale de Vaca Muerta. Dirigido a técnicos, operadores,
+  supervisores y profesionales que buscan desarrollar competencias clave en
+  planificación, preparación, seguridad operativa y ejecución.
 temario:
   - Historia
   - Equipo de perforación

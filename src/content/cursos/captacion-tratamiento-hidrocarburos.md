@@ -2,9 +2,11 @@
 titulo: Captación y Tratamiento de Hidrocarburos
 nivel: intermedio
 resumen: >-
-  Del pozo a la venta: captación primaria y plantas de tratamiento de gas,
-  crudo y agua. Deshidratación, captación de vapores, control de proceso y
-  especificaciones de venta.
+  Conocé las instalaciones de superficie que permiten captar, tratar y
+  acondicionar la producción de petróleo, gas y agua. Aprendé el
+  funcionamiento de baterías, satélites, plantas de tratamiento de crudo, gas
+  y agua, sus equipos y procesos clave para desarrollarte en la industria Oil
+  y Gas.
 temario:
   - Ductos y colectores
   - Satélites y baterías

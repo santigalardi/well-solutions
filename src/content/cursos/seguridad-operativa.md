@@ -1,10 +1,12 @@
 ---
-titulo: Seguridad Operativa
+titulo: Seguridad Operativa en el Entorno Laboral
 nivel: avanzado
 resumen: >-
-  La seguridad desde la óptica operativa: identificación de peligros,
-  análisis y gestión del riesgo, reglas de oro y permisos de trabajo, para
-  operar bajo los más altos estándares.
+  Aprendé los fundamentos de seguridad en operaciones petroleras:
+  identificación de riesgos, permisos de trabajo, EPP, gestión y cumplimiento
+  de procedimientos operativos, gestión ambiental y respuesta ante
+  emergencias. Fortalecé una cultura preventiva que prioriza a las personas,
+  el ambiente y la continuidad operacional.
 temario:
   - Liderazgo y cultura HSE
   - Gestión de riesgos operacionales

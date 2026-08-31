@@ -1,10 +1,11 @@
 ---
-titulo: Liderazgo Medio
+titulo: Liderazgo
 nivel: intermedio
 resumen: >-
-  Líderes en tiempos cambiantes: inteligencia emocional, comunicación y
-  planificación efectiva, delegación y resolución de conflictos para liderar
-  equipos de operación.
+  Comprendé cómo se organizan e integran las áreas de una empresa de Oil y
+  Gas, desde Operaciones, Mantenimiento e Ingeniería hasta HSE y áreas
+  comerciales. Desarrollá una visión integral del negocio, fortaleciendo el
+  liderazgo, la coordinación y la toma de decisiones.
 temario:
   - Estructuras corporativas
   - Tipos de liderazgo
