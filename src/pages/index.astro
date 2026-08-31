@@ -228,16 +228,16 @@ const social = {
       <div class="grid grid-cols-2 gap-4">
         {[
           { n: '20', u: 'años', d: 'de know-how operando en campo' },
-          { n: '5', u: 'cursos', d: 'construidos sobre operación real' },
+          { n: String(cursos.length), u: 'cursos', d: 'construidos sobre operación real' },
           { n: '3', u: 'niveles', d: 'de ingresante a avanzado' },
           { n: '100%', u: 'online', d: 'a tu ritmo, desde el celu' },
         ].map((s) => (
-          <div class="group flex flex-col gap-3 rounded-xl border border-brand-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:shadow-lg hover:shadow-brand-500/10">
-            <div class="flex items-baseline gap-2">
-              <span class="font-display text-5xl font-extrabold leading-none text-brand-900">{s.n}</span>
-              <span class="font-display text-lg font-bold text-cyan-500">{s.u}</span>
+          <div class="group flex flex-col gap-3 rounded-xl border border-brand-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:shadow-lg hover:shadow-brand-500/10 sm:p-6">
+            <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <span class="font-display text-4xl font-extrabold leading-none text-brand-900 sm:text-5xl">{s.n}</span>
+              <span class="font-display text-base font-bold text-cyan-500 sm:text-lg">{s.u}</span>
             </div>
-            <p class="text-sm leading-snug text-slate-500">{s.d}</p>
+            <p class="text-sm leading-snug text-slate-600">{s.d}</p>
           </div>
         ))}
       </div>
