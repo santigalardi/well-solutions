@@ -160,7 +160,7 @@ const social = {
       <!-- Flyer de la academia, enmarcado como registro de plano.
            Sin gradiente encima: la pieza tiene texto y taparlo la haría
            ilegible (a diferencia de la foto de campo que había antes). -->
-      <figure class="rise relative mx-auto max-w-[220px] sm:max-w-[320px] lg:max-w-[430px]" style="animation-delay: 320ms">
+      <figure class="rise relative mx-auto w-full max-w-[360px] sm:max-w-[380px] lg:max-w-[430px]" style="animation-delay: 320ms">
         <div id="hero-tilt" class="hero-tilt float-soft">
           <div class="corner-ticks relative border border-white/15 bg-brand-900/40 p-2 backdrop-blur-sm sm:p-3">
             <div class="relative overflow-hidden">
@@ -168,8 +168,8 @@ const social = {
                 src={flyer}
                 alt="Formación online en Petróleo y Gas — yacimientos no convencionales, Vaca Muerta, Neuquén"
                 class="w-full"
-                widths={[430, 860]}
-                sizes="430px"
+                widths={[360, 430, 860]}
+                sizes="(min-width: 1024px) 430px, (min-width: 640px) 380px, 100vw"
                 loading="eager"
                 fetchpriority="high"
               />

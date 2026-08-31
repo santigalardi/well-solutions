@@ -120,7 +120,14 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
-.float-soft { animation: float-soft 7s ease-in-out infinite; }
+/*
+  Flotación sutil del flyer. Solo desde lg: en mobile la imagen ocupa casi
+  toda la pantalla y el movimiento perpetuo distrae (y gasta batería).
+*/
+.float-soft { animation: none; }
+@media (min-width: 1024px) {
+  .float-soft { animation: float-soft 7s ease-in-out infinite; }
+}
 
 /* --- Parallax reactivo al mouse (lo mueve JS via --px/--py) --- */
 .hero-tilt {
