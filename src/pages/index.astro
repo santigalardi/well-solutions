@@ -51,6 +51,40 @@ const serviciosCampo = [
   'Capacitaciones in situ',
 ];
 
+// Papers y premios de José (los pasó él; texto tal cual, solo ortografía).
+const publicaciones = [
+  {
+    titulo: 'SPE 190963 · Cambio cultural en el empleo de real time',
+    detalle:
+      'Operaciones de optimización en pozos de Vaca Muerta (NOC), desplegando ' +
+      'un espacio colaborativo de trabajo. En el marco de la creación del espacio ' +
+      'de optimización de producción como nuevo módulo en salas de control.',
+    expedidor: 'Sociedad de Ingeniería de Producción',
+    fecha: 'ago. 2018',
+  },
+  {
+    titulo: 'SPE 190930 · Algoritmo de diagnóstico de Plunger Lift',
+    detalle: 'Autor. Presentado en el V Congreso de Ingeniería y SSPP.',
+    expedidor: 'Sociedad de Ingeniería de Producción',
+    fecha: 'ago. 2018',
+  },
+  {
+    titulo: '2.º puesto · Monitoreo de pozos surgentes online con Data Analytics',
+    detalle:
+      'Creación del algoritmo predictivo ARIMA, con impacto significativo en la ' +
+      'captación de la producción no localizada.',
+    expedidor: 'Gerencia Ejecutiva de Producción',
+    fecha: 'nov. 2018',
+  },
+  {
+    titulo: 'Premio Gorosito · Trabajo en equipo',
+    detalle:
+      'Optimizaciones en sistemas de extracción artificial en pozos no convencionales.',
+    expedidor: 'YPF S.A.',
+    fecha: 'dic. 2016',
+  },
+];
+
 const social = {
   linkedin: 'https://www.linkedin.com/in/jos%C3%A9-luis-barros-0822a412b',
   instagram: 'https://www.instagram.com/wellsolutions.academia',
@@ -260,7 +294,6 @@ const social = {
             'Operaciones con Apache, YPF/Chevron (Loma Campana), PAE y Vista',
             'Docente en la UTN, formando futuros profesionales del petróleo y el gas',
             'Expositor en congresos de la industria de hidrocarburos',
-            'Especialista en extracción artificial, algoritmos predictivos y manejo por excepción',
           ].map((item) => (
             <li class="flex items-start gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4 text-base text-brand-50">
               <svg viewBox="0 0 20 20" fill="currentColor" class="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0z" clip-rule="evenodd"></path></svg>
@@ -268,7 +301,31 @@ const social = {
             </li>
           ))}
         </ul>
-        <div class="mt-8 flex flex-wrap items-center gap-4">
+
+        <!-- Papers y premios. Van fuera de la grilla de logros: cada uno
+             tiene título, expedidor y fecha, y no entran en una tarjeta corta. -->
+        <div class="mt-10">
+          <p class="text-xs font-semibold uppercase tracking-wider text-cyan-400">
+            Publicaciones y reconocimientos
+          </p>
+          <ul class="mt-5 flex flex-col gap-5">
+            {publicaciones.map((pub) => (
+              <li class="border-l-2 border-cyan-400/40 pl-5">
+                <p class="font-display text-base font-bold leading-snug text-white">
+                  {pub.titulo}
+                </p>
+                <p class="mt-1.5 text-sm leading-relaxed text-brand-100/90">
+                  {pub.detalle}
+                </p>
+                <p class="mt-2 text-xs text-brand-100/70">
+                  {pub.expedidor} · {pub.fecha}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="mt-10 flex flex-wrap items-center gap-4">
           <a
             href={social.linkedin}
             target="_blank"
