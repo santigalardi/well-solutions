@@ -8,7 +8,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "sync": "astro sync"
+    "sync": "astro sync",
+    "prebuild": "node scripts/actualizar-precios.mjs --aplicar",
+    "precios": "node scripts/actualizar-precios.mjs",
+    "precios:aplicar": "node scripts/actualizar-precios.mjs --aplicar"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.2.0",
