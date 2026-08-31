@@ -6,14 +6,67 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  /* JSON-LD propio de la página (Course en las fichas de curso). */
+  schema?: Record<string, unknown>;
 }
 
 const {
   title,
   description = 'Academia online de operaciones en campos petroleros. Formate desde la base hasta la sala de control, con más de 20 años de experiencia en Upstream y Vaca Muerta.',
+  schema,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+/*
+  Google corta la meta description alrededor de los 160 caracteres. Los
+  resúmenes de los cursos son más largos, así que se recortan en el último
+  punto o espacio antes del límite (no a mitad de palabra).
+*/
+function recortar(texto: string, max = 158): string {
+  const limpio = texto.replace(/\s+/g, ' ').trim();
+  if (limpio.length <= max) return limpio;
+  const corte = limpio.slice(0, max);
+  const punto = corte.lastIndexOf('. ');
+  if (punto > max * 0.6) return corte.slice(0, punto + 1);
+  return corte.slice(0, corte.lastIndexOf(' ')).replace(/[,;:]$/, '') + '…';
+}
+
+const metaDescription = recortar(description);
+
+// Imagen para redes (Meta, LinkedIn, WhatsApp).
+const ogImage = new URL('/og-image.jpg', Astro.site);
+
+/*
+  Structured data de la organización. Le dice a Google qué es este sitio,
+  dónde opera y cómo contactarlo — es lo que habilita el panel de marca
+  y los resultados enriquecidos.
+*/
+const schemaOrganizacion = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'Well Solutions · Academia de Petróleo y Gas',
+  alternateName: 'Well Solutions Academy',
+  url: Astro.site?.toString(),
+  logo: new URL('/logo.png', Astro.site).toString(),
+  image: ogImage.toString(),
+  description:
+    'Academia online de formación en operaciones de petróleo y gas, con 20 años ' +
+    'de experiencia en Upstream y Vaca Muerta.',
+  email: 'academia@wellsolutions.com.ar',
+  telephone: '+54-9-299-533-5935',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Neuquén',
+    addressRegion: 'Neuquén',
+    addressCountry: 'AR',
+  },
+  areaServed: { '@type': 'Country', name: 'Argentina' },
+  sameAs: [
+    'https://www.linkedin.com/in/jos%C3%A9-luis-barros-0822a412b',
+    'https://www.instagram.com/wellsolutions.academia',
+  ],
+};
 ---
 
 <!doctype html>
@@ -32,15 +85,28 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     />
 
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph / redes (Meta, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Well Solutions · Academia de Petróleo y Gas" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured data: organización + el schema propio de cada página -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(schemaOrganizacion)}
+    />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </head>
   <body class="min-h-screen bg-white font-sans text-slate-800 antialiased">
     <Header />

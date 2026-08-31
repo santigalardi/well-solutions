@@ -1,0 +1,8 @@
+# Well Solutions · Academia de Petróleo y Gas
+User-agent: *
+Allow: /
+
+# La página de gracias es post-compra: no aporta en buscadores.
+Disallow: /gracias
+
+Sitemap: https://wellsolutions.com.ar/sitemap-index.xml

@@ -24,9 +24,41 @@ const nivelAccent: Record<string, { text: string; bar: string; dot: string; chip
   avanzado: { text: 'text-brand-300', bar: 'bg-brand-400', dot: 'bg-brand-400', chip: 'border-brand-300/40 text-brand-200' },
 };
 const acento = nivelAccent[nivel];
+
+/*
+  Structured data del curso. Es lo que le permite a Google mostrar el
+  resultado enriquecido (nombre, modalidad, precio) en vez de un link seco.
+*/
+const schemaCurso = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: titulo,
+  description: resumen,
+  url: new URL(`/cursos/${curso.id}`, Astro.site).toString(),
+  inLanguage: 'es-AR',
+  provider: {
+    '@type': 'EducationalOrganization',
+    name: 'Well Solutions · Academia de Petróleo y Gas',
+    url: Astro.site?.toString(),
+  },
+  educationalLevel: nivelLabel[nivel],
+  teaches: temario,
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: 'online',
+    courseWorkload: duracion ?? 'A tu ritmo',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: precio.ars,
+    priceCurrency: 'ARS',
+    availability: 'https://schema.org/InStock',
+    url: new URL(`/cursos/${curso.id}`, Astro.site).toString(),
+  },
+};
 ---
 
-<Base title={`${titulo} · Well Solutions`} description={resumen}>
+<Base title={`${titulo} · Well Solutions`} description={resumen} schema={schemaCurso}>
   <!-- Cabecera navy del curso -->
   <section class="relative overflow-hidden bg-brand-950 text-white">
     <div class="absolute -left-32 top-0 h-96 w-96 rounded-full bg-brand-500/20 blur-[130px]"></div>

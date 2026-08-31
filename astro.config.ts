@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://docs.astro.build/en/reference/configuration-reference/
@@ -18,6 +19,14 @@ export default defineConfig({
   adapter: cloudflare({
     platformProxy: { enabled: true },
   }),
+
+  // Genera sitemap-index.xml con las páginas prerenderizadas.
+  // /gracias es post-compra: no aporta nada en buscadores.
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/gracias'),
+    }),
+  ],
 
   vite: {
     // cast: astro y @tailwindcss/vite resuelven copias distintas de los

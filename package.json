@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.2.0",
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^5.6.0",
     "mercadopago": "^2.3.0"
   },
