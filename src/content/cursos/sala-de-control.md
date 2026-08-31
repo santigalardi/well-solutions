@@ -3,7 +3,7 @@ titulo: Salas de Control
 nivel: avanzado
 resumen: >-
   Descubrí cómo el monitoreo en tiempo real y la operación remota transforman
-  Oil y Gas. Aprendé sobre salas de control, manejo por excepción y análisis
+  Oil & Gas. Aprendé sobre salas de control, manejo por excepción y análisis
   de datos para anticipar desvíos, reducir riesgos y optimizar el rendimiento
   de los activos.
 temario:

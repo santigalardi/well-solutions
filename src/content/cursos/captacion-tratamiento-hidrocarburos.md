@@ -5,8 +5,8 @@ resumen: >-
   Conocé las instalaciones de superficie que permiten captar, tratar y
   acondicionar la producción de petróleo, gas y agua. Aprendé el
   funcionamiento de baterías, satélites, plantas de tratamiento de crudo, gas
-  y agua, sus equipos y procesos clave para desarrollarte en la industria Oil
-  y Gas.
+  y agua, sus equipos y procesos clave para desarrollarte en la industria
+  Oil & Gas.
 temario:
   - Ductos y colectores
   - Satélites y baterías
