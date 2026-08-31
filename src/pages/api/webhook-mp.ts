@@ -5,9 +5,13 @@ export const prerender = false;
 /*
   Webhook de Mercado Pago. MP lo llama cuando cambia el estado de un pago.
   Acá confirmamos el pago contra la API de MP y, si está aprobado, se lo
-  reenviamos a Make (escenario "Well Solutions - Ventas MP"), que registra
-  la venta en el Sheet y manda el mail de aviso a José, quien da de alta al
-  alumno en Skool (paso manual, como se acordó con el cliente).
+  reenviamos a Make (escenario "Well Solutions - Ventas MP → Skool + Sheet
+  + Aviso"), que invita al alumno a Skool, registra la venta en el Sheet y
+  manda los dos mails (aviso a José y confirmación al alumno).
+
+  El alta en Skool es automática: Make llama al webhook del grupo con el
+  email del alumno y Skool le manda la invitación al aula. Por eso es
+  importante que metadata.alumno_email sea el mail real del alumno.
 
   Si MP_WEBHOOK_SECRET está configurado, se valida la firma x-signature
   (la clave se saca del panel de la app en MP al configurar el webhook).
