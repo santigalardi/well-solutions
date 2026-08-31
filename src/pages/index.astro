@@ -72,27 +72,29 @@ const social = {
     </svg>
     <div class="absolute -left-20 top-0 h-96 w-96 rounded-full bg-brand-500/20 blur-[120px]"></div>
 
-    <div class="relative mx-auto grid max-w-6xl gap-14 px-4 py-20 sm:py-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+    <div class="relative mx-auto grid max-w-6xl gap-14 px-4 py-16 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
       <div>
         <div class="rise flex items-center gap-3">
           <span class="h-px w-10 bg-cyan-400"></span>
           <p class="spec-label text-cyan-400">Advisors · Producción Oil y Gas · Neuquén</p>
         </div>
 
-        <h1
-          class="rise mt-6 font-display text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl xl:text-5xl"
-          style="animation-delay: 80ms"
-        >
-          Bienvenidos a Well Solutions
-          <span class="relative inline-block text-cyan-400">
+        <h1 class="rise mt-6" style="animation-delay: 80ms">
+          <span class="block font-display text-xl font-semibold tracking-tight text-white/90 sm:text-2xl">
+            Bienvenidos a Well Solutions
+          </span>
+          <span class="relative mt-2 inline-block font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-cyan-400 sm:text-[2.75rem] xl:text-5xl">
             Academia de formación en Oil y Gas
             <span class="draw-line absolute -bottom-2 left-0 h-1 w-full bg-cyan-400/60" style="animation-delay: 700ms"></span>
           </span>
         </h1>
 
-        <p class="rise mt-8 max-w-xl text-lg text-brand-100/80 sm:text-xl" style="animation-delay: 160ms">
-          <strong class="font-semibold text-white">20 años de experiencia. Conocimiento para la industria que viene.</strong>
-          Una plataforma de formación especializada en Oil &amp; Gas que integra
+        <p class="rise mt-8 max-w-xl font-display text-xl font-semibold text-white sm:text-2xl" style="animation-delay: 160ms">
+          20 años de experiencia. Conocimiento para la industria que viene.
+        </p>
+
+        <p class="rise mt-4 max-w-xl text-base leading-relaxed text-brand-100/90 sm:text-lg" style="animation-delay: 200ms">
+          Una plataforma de formación especializada en Oil y Gas que integra
           conocimiento técnico, evolución tecnológica y comunidad profesional para
           desarrollar las capacidades que demanda la industria energética actual.
         </p>
@@ -107,11 +109,13 @@ const social = {
           </a>
           <a
             href="#empresas"
-            class="inline-flex items-center justify-center rounded-xl border border-white/20 px-8 py-4 text-base font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+            class="group inline-flex items-center justify-center gap-2 px-2 py-4 text-base font-semibold text-brand-100/70 transition hover:text-cyan-400"
           >
             Soluciones para empresas
+            <span class="transition group-hover:translate-x-1">→</span>
           </a>
         </div>
+
       </div>
 
       <!-- Flyer de la academia, enmarcado como registro de plano.
@@ -133,16 +137,19 @@ const social = {
               <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"></div>
             </div>
           </div>
+
         </div>
       </figure>
     </div>
 
-    <!-- Banda de referencias -->
+    <!-- Banda de referencias. Es la prueba de credibilidad del hero:
+         va separada por una línea para que se lea como respaldo y no
+         como parte del bloque de texto. -->
     <div class="relative">
       <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-10 gap-y-3 px-4 py-6">
-        <span class="spec-label text-brand-100/50">Trabajamos en campo con</span>
+        <span class="spec-label text-brand-100/80">Trabajamos en campo con</span>
         {referencias.map((r) => (
-          <span class="font-display text-lg font-bold tracking-wide text-white/70">{r}</span>
+          <span class="font-display text-lg font-bold tracking-wide text-white/90">{r}</span>
         ))}
       </div>
     </div>
