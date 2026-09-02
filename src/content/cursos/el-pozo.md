@@ -18,7 +18,7 @@ temario:
   - Reparaciones y mantenimiento
 duracion: A tu ritmo · online
 precio:
-  ars: 120000
+  ars: 125000
   usd: 80
 orden: 2
 publicado: true
