@@ -7,6 +7,7 @@ import VideoLite from '../components/VideoLite.astro';
 import flyer from '../assets/flyer-vaca-muerta.png';
 import modalidadPresencial from '../assets/modalidad-presencial.png';
 import modalidadOnline from '../assets/modalidad-online.png';
+import vacaMuertaAerea from '../assets/vacamuertaair.jpg';
 
 const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
   .sort((a, b) => a.data.orden - b.data.orden);
@@ -416,15 +417,15 @@ const social = {
         </a>
       </div>
 
-      <!-- Foto de campo (José pidió sacar la de sala de control) -->
-      <div class="mx-auto w-full max-w-sm lg:max-w-none">
+      <!-- Vista aérea de las locaciones en Vaca Muerta -->
+      <div class="mx-auto w-full max-w-lg lg:max-w-none">
         <figure class="corner-ticks relative border border-white/15 bg-brand-900/40 p-2">
           <div class="relative overflow-hidden">
-            <img src="/campo/equipo-campo.jpg" alt="Equipo de intervención de pozo en Vaca Muerta" class="aspect-[4/3] w-full object-cover sm:aspect-[3/4]" width="839" height="1118" loading="lazy" />
+            <Image src={vacaMuertaAerea} alt="Vista aérea de locaciones petroleras en Vaca Muerta" class="aspect-[16/10] w-full object-cover" widths={[465, 930]} sizes="(min-width: 1024px) 50vw, 100vw" loading="lazy" />
             <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/50 to-transparent"></div>
             <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"></div>
           </div>
-          <figcaption class="spec-label px-1 pt-2 text-brand-100/60">Intervención de pozo</figcaption>
+          <figcaption class="spec-label px-1 pt-2 text-brand-100/60">Locaciones en Vaca Muerta</figcaption>
         </figure>
       </div>
     </div>
