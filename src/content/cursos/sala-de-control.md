@@ -17,8 +17,8 @@ temario:
   - Coordinación de operaciones de campo
 duracion: A tu ritmo · online
 precio:
-  ars: 140000
-  usd: 90
+  ars: 155000
+  usd: 100
 orden: 8
 publicado: true
 destacado: true

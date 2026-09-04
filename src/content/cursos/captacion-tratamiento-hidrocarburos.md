@@ -18,8 +18,8 @@ temario:
   - Comerciales
 duracion: A tu ritmo · online
 precio:
-  ars: 125000
-  usd: 80
+  ars: 215000
+  usd: 140
 orden: 4
 publicado: true
 destacado: false

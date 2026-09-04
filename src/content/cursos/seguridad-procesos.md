@@ -17,8 +17,8 @@ temario:
   - Preparación y respuesta a emergencias
 duracion: A tu ritmo · online
 precio:
-  ars: 140000
-  usd: 90
+  ars: 185000
+  usd: 120
 orden: 6
 publicado: true
 destacado: false
