@@ -14,8 +14,8 @@ const cursos = defineCollection({
   schema: ({ image }) =>
     z.object({
       titulo: z.string(),
-      // Nivel dentro de la academia.
-      nivel: z.enum(['principiante', 'intermedio', 'avanzado']),
+      // Nivel dentro de la academia (etiquetas de la lista oficial de José).
+      nivel: z.enum(['basico-medio', 'medio-avanzado', 'avanzado']),
       // Resumen corto para las cards del catálogo.
       resumen: z.string(),
       // Temario / lo que incluye el curso.

@@ -18,7 +18,7 @@ export function formatUsd(amount: number): string {
 
 /** Etiqueta legible para cada nivel. */
 export const nivelLabel: Record<string, string> = {
-  principiante: 'Principiante',
-  intermedio: 'Intermedio',
+  'basico-medio': 'Básico-Medio',
+  'medio-avanzado': 'Medio-Avanzado',
   avanzado: 'Avanzado',
 };

@@ -1,6 +1,6 @@
 ---
 titulo: Captación y Tratamiento de Hidrocarburos
-nivel: intermedio
+nivel: basico-medio
 resumen: >-
   Conocé las instalaciones de superficie que permiten captar, tratar y
   acondicionar la producción de petróleo, gas y agua. Aprendé el

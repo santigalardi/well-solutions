@@ -1,6 +1,6 @@
 ---
 titulo: Seguridad Operativa en el Entorno Laboral
-nivel: avanzado
+nivel: medio-avanzado
 resumen: >-
   Aprendé los fundamentos de seguridad en operaciones petroleras:
   identificación de riesgos, permisos de trabajo, EPP, gestión y cumplimiento

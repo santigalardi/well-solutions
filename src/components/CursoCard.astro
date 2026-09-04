@@ -11,8 +11,8 @@ const { titulo, nivel, resumen, precio, temario, duracion } = curso.data;
 
 // Acento de color y barra superior según el nivel.
 const nivelStyle: Record<string, { text: string; bar: string; dot: string }> = {
-  principiante: { text: 'text-emerald-600', bar: 'bg-emerald-400', dot: 'bg-emerald-400' },
-  intermedio: { text: 'text-cyan-600', bar: 'bg-cyan-400', dot: 'bg-cyan-400' },
+  'basico-medio': { text: 'text-emerald-600', bar: 'bg-emerald-400', dot: 'bg-emerald-400' },
+  'medio-avanzado': { text: 'text-cyan-600', bar: 'bg-cyan-400', dot: 'bg-cyan-400' },
   avanzado: { text: 'text-brand-600', bar: 'bg-brand-500', dot: 'bg-brand-500' },
 };
 const estilo = nivelStyle[nivel];

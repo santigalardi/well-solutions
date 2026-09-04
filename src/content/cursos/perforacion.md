@@ -1,6 +1,6 @@
 ---
 titulo: Perforación
-nivel: principiante
+nivel: basico-medio
 resumen: >-
   Aprendé los conceptos, procesos, equipos y mejores prácticas utilizados en
   yacimientos shale de Vaca Muerta. Dirigido a técnicos, operadores,

@@ -1,6 +1,6 @@
 ---
 titulo: Liderazgo
-nivel: intermedio
+nivel: basico-medio
 resumen: >-
   Comprendé cómo se organizan e integran las áreas de una empresa de Oil y
   Gas, desde Operaciones, Mantenimiento e Ingeniería hasta HSE y áreas

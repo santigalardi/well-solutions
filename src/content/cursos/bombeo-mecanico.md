@@ -1,6 +1,6 @@
 ---
 titulo: Bombeo Mecánico
-nivel: intermedio
+nivel: basico-medio
 resumen: >-
   Operación y optimización del sistema de extracción más usado en el campo.
   Desde los componentes del aparato individual de bombeo hasta las cartas

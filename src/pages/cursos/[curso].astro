@@ -19,8 +19,8 @@ const { Content } = await render(curso);
 
 // Acento de color por nivel (coherente con las cards del catálogo).
 const nivelAccent: Record<string, { text: string; bar: string; dot: string; chip: string }> = {
-  principiante: { text: 'text-emerald-400', bar: 'bg-emerald-400', dot: 'bg-emerald-400', chip: 'border-emerald-400/40 text-emerald-300' },
-  intermedio: { text: 'text-cyan-400', bar: 'bg-cyan-400', dot: 'bg-cyan-400', chip: 'border-cyan-400/40 text-cyan-300' },
+  'basico-medio': { text: 'text-emerald-400', bar: 'bg-emerald-400', dot: 'bg-emerald-400', chip: 'border-emerald-400/40 text-emerald-300' },
+  'medio-avanzado': { text: 'text-cyan-400', bar: 'bg-cyan-400', dot: 'bg-cyan-400', chip: 'border-cyan-400/40 text-cyan-300' },
   avanzado: { text: 'text-brand-300', bar: 'bg-brand-400', dot: 'bg-brand-400', chip: 'border-brand-300/40 text-brand-200' },
 };
 const acento = nivelAccent[nivel];

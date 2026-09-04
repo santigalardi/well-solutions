@@ -1,6 +1,6 @@
 ---
 titulo: El Pozo Surgente
-nivel: principiante
+nivel: avanzado
 resumen: >-
   Descubrirás cómo evolucionan los pozos petroleros y gasíferos desde el
   inicio de la producción hasta su declinación, incluyendo intervenciones,

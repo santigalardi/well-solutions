@@ -8,7 +8,7 @@ const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
   .sort((a, b) => a.data.orden - b.data.orden);
 
 // Agrupamos por nivel para mostrar el catálogo estructurado.
-const niveles = ['principiante', 'intermedio', 'avanzado'] as const;
+const niveles = ['basico-medio', 'medio-avanzado', 'avanzado'] as const;
 const porNivel = niveles
   .map((nivel) => ({
     nivel,
@@ -17,15 +17,15 @@ const porNivel = niveles
   .filter((g) => g.cursos.length > 0);
 
 const nivelDescripcion: Record<string, string> = {
-  principiante: 'Los cimientos: entendé la industria y sus procesos desde cero.',
-  intermedio: 'Dominá la operación: sistemas de extracción y liderazgo de equipos.',
-  avanzado: 'Optimización, seguridad y control — el nivel de la sala de control.',
+  'basico-medio': 'Los cimientos y la operación diaria: procesos, instalaciones y control de producción.',
+  'medio-avanzado': 'Seguridad operativa en el entorno laboral, con la práctica de campo por delante.',
+  avanzado: 'El pozo surgente: el nivel de mayor complejidad técnica.',
 };
 
 // Acento de color por nivel (coherente con la barra de las cards).
 const nivelAccent: Record<string, { text: string; bar: string; dot: string }> = {
-  principiante: { text: 'text-emerald-600', bar: 'bg-emerald-400', dot: 'bg-emerald-400' },
-  intermedio: { text: 'text-cyan-600', bar: 'bg-cyan-400', dot: 'bg-cyan-400' },
+  'basico-medio': { text: 'text-emerald-600', bar: 'bg-emerald-400', dot: 'bg-emerald-400' },
+  'medio-avanzado': { text: 'text-cyan-600', bar: 'bg-cyan-400', dot: 'bg-cyan-400' },
   avanzado: { text: 'text-brand-600', bar: 'bg-brand-500', dot: 'bg-brand-500' },
 };
 

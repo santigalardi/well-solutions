@@ -1,6 +1,6 @@
 ---
 titulo: Procesos Oil y Gas
-nivel: principiante
+nivel: basico-medio
 resumen: >-
   Los conocimientos necesarios para entender y operar los procesos de
   tratamiento de hidrocarburos: de las baterías de captación primaria a la

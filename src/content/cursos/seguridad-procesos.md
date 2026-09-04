@@ -1,6 +1,6 @@
 ---
 titulo: Seguridad de Procesos Basada en el Riesgo
-nivel: avanzado
+nivel: basico-medio
 resumen: >-
   Aprendé los principios de Seguridad de Procesos aplicados a Oil & Gas,
   priorizando la seguridad del operario como valor fundamental. Identificá

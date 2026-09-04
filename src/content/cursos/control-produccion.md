@@ -1,6 +1,6 @@
 ---
 titulo: Control de Producción · Unidad de Negocio
-nivel: avanzado
+nivel: basico-medio
 resumen: >-
   Aprendé a analizar e interpretar datos de producción mediante indicadores,
   tendencias, balances y control de pérdidas. Transformá datos operativos en

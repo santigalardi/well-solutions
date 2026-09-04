@@ -1,6 +1,6 @@
 ---
 titulo: Artificial Lift · Sistemas de Levantamiento Artificial
-nivel: intermedio
+nivel: basico-medio
 resumen: >-
   Aprendé los fundamentos del Artificial Lift y las principales tecnologías
   aplicadas a pozos de petróleo y gas: bombeo mecánico, Gas Lift y Plunger
