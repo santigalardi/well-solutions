@@ -7,6 +7,10 @@ import flyer from '../assets/flyer-vaca-muerta.png';
 import modalidadPresencial from '../assets/modalidad-presencial.png';
 import modalidadOnline from '../assets/modalidad-online.png';
 import vacaMuertaAerea from '../assets/vacamuertaair.jpg';
+import fotoAgustin from '../assets/testimonios/agustin.jpg';
+import fotoNatalia from '../assets/testimonios/natalia.jpg';
+import fotoKatherin from '../assets/testimonios/katherin.jpg';
+import fotoGeocontrol from '../assets/testimonios/geocontrol.jpg';
 
 const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
   .sort((a, b) => a.data.orden - b.data.orden);
@@ -84,6 +88,61 @@ const publicaciones = [
     fecha: 'dic. 2016',
   },
 ];
+
+// Referencias de colegas y clientes (PDF que pasó José, 7/sep). Texto tal
+// cual, solo ortografía. Son sobre José como profesional, no sobre los cursos.
+const testimonios = [
+  {
+    foto: fotoAgustin,
+    cita:
+      'Tuve la oportunidad de trabajar junto a José Luis y destaco especialmente ' +
+      'su compromiso y responsabilidad, enfocado en la optimización de producción.',
+    detalle:
+      'Juntos llevamos adelante la desafiante tarea de implementar Artificial Lift ' +
+      'en campos de NOC YPF, entre 2018 y 2020.',
+    nombre: 'Agustín Betti',
+    cargo: 'Ing. Producción Sr (No Convencional) · VISTA',
+    extra: 'Ingeniero Oil & Gas · MBA · Neuquén',
+  },
+  {
+    foto: fotoNatalia,
+    cita:
+      'José Luis se destaca por su capacidad para abordar desafíos de Seguridad ' +
+      'de Procesos con criterio, claridad y una fuerte orientación a la mejora continua.',
+    detalle:
+      'Durante el PEM y las auditorías internas, agregamos valor a las visitas de ' +
+      'campo para fortalecer la planificación basada en el riesgo.',
+    nombre: 'Natalia Diaz',
+    cargo: 'Lic. HSE · Asuntos públicos y comunidades · YPF',
+    extra: 'Diplomatura en Seguridad de Procesos Oil & Gas',
+  },
+  {
+    foto: fotoKatherin,
+    cita:
+      'Fue un gran tutor para mí, siempre dispuesto a enseñar. Destaco su ' +
+      'compromiso, disciplina y búsqueda incansable por optimizar y agregar valor a la compañía.',
+    detalle:
+      'Tuve la oportunidad de trabajar con José en el desarrollo de salas de ' +
+      'control orientadas a la optimización en tiempo real.',
+    nombre: 'Katherin Silva Alonso',
+    cargo: 'Líder Ejecución de Proyectos · Oil & Gas · YPF',
+    extra: '',
+  },
+];
+
+// Caso B2B: la voz es de Well Solutions ("desarrollamos para ellos"), con
+// Oscar como referencia. Por eso no va entre comillas.
+const casoGeocontrol = {
+  foto: fotoGeocontrol,
+  titulo: 'Plan de capacitación en Plunger Lift para Geocontrol',
+  texto:
+    'Junto al equipo de Geocontrol compartimos la experiencia AOG 2023 en Buenos ' +
+    'Aires. Desarrollamos para ellos un plan de capacitación en Plunger Lift, ' +
+    'orientado a pozos NOC en Vaca Muerta, Neuquén, con visitas a potenciales ' +
+    'clientes para su proyecto de Artificial Lift.',
+  referencia: 'Oscar E. Erreteguy',
+  cargo: 'Presidente de Geocontrol',
+};
 
 const social = {
   linkedin: 'https://www.linkedin.com/in/jos%C3%A9-luis-barros-0822a412b',
@@ -351,6 +410,99 @@ const social = {
           </a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===================== REFERENCIAS ===================== -->
+  <!-- Va pegada al instructor: la bio dice quién es José y esto lo respalda
+       con colegas de YPF/VISTA y un cliente B2B, antes de mostrar el catálogo. -->
+  <section id="referencias" class="relative scroll-mt-28 overflow-hidden bg-white bg-blueprint">
+    <div class="relative mx-auto max-w-6xl px-4 py-16 sm:py-24">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3">
+          <span class="h-px w-10 bg-brand-500"></span>
+          <p class="spec-label text-brand-500">Referencias</p>
+        </div>
+        <h2 class="mt-5 font-display text-3xl font-bold text-brand-900 sm:text-4xl">
+          Lo que dicen quienes trabajaron con José
+        </h2>
+        <p class="mt-4 text-lg text-slate-600">
+          Colegas de YPF y Vista, y empresas que nos contrataron. Gente que lo vio
+          operar en campo y en sala de control.
+        </p>
+      </div>
+
+      <!-- Tres colegas -->
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {testimonios.map((t) => (
+          <figure class="group flex flex-col rounded-2xl border border-brand-200 bg-white p-7 shadow-blueprint transition duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:shadow-xl hover:shadow-brand-500/10">
+            <svg viewBox="0 0 32 32" fill="currentColor" class="h-8 w-8 rotate-180 text-cyan-400" aria-hidden="true">
+              <path d="M13.5 6.5v8.2c0 5.6-3.2 9.5-9 11.3l-1.2-2.4c3.3-1.3 5.3-3.4 5.8-6.4H3V6.5h10.5Zm15.5 0v8.2c0 5.6-3.2 9.5-9 11.3l-1.2-2.4c3.3-1.3 5.3-3.4 5.8-6.4h-6.1V6.5H29Z" />
+            </svg>
+            <blockquote class="mt-4 flex-1">
+              <p class="font-display text-lg font-semibold leading-snug text-brand-900">
+                {t.cita}
+              </p>
+              <p class="mt-4 text-sm leading-relaxed text-slate-600">{t.detalle}</p>
+            </blockquote>
+            <figcaption class="mt-7 flex items-center gap-4 border-t border-brand-100 pt-6">
+              <div class="corner-ticks shrink-0 border border-brand-200 p-1">
+                <Image
+                  src={t.foto}
+                  alt={`Foto de ${t.nombre}`}
+                  class="h-16 w-16 object-cover"
+                  width={128}
+                  height={128}
+                  loading="lazy"
+                />
+              </div>
+              <div class="min-w-0">
+                <p class="font-display font-bold text-brand-900">{t.nombre}</p>
+                <p class="mt-0.5 text-sm leading-snug text-slate-600">{t.cargo}</p>
+                {t.extra && <p class="mt-0.5 text-xs leading-snug text-slate-500">{t.extra}</p>}
+              </div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <!-- Caso B2B: Geocontrol. Foto panorámica arriba (entran los cinco),
+           texto y referencia abajo. -->
+      <article class="mt-6 overflow-hidden rounded-2xl border border-brand-200 bg-white shadow-blueprint">
+        <figure class="relative bg-brand-50">
+          <Image
+            src={casoGeocontrol.foto}
+            alt="José Luis Barros con el equipo de Geocontrol en la AOG 2023, Buenos Aires"
+            class="aspect-[16/9] w-full object-cover object-top sm:aspect-[21/9] lg:aspect-[3/1]"
+            widths={[640, 1120, 2240]}
+            sizes="(min-width: 1152px) 1120px, 100vw"
+            loading="lazy"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/40 via-transparent to-transparent"></div>
+          <figcaption class="spec-label absolute bottom-4 left-5 bg-brand-950/80 px-2.5 py-1 text-brand-100">
+            AOG 2023 · Buenos Aires
+          </figcaption>
+        </figure>
+        <div class="grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-14">
+          <div>
+            <p class="spec-label text-brand-500">Caso · Empresas</p>
+            <h3 class="mt-4 max-w-2xl font-display text-2xl font-bold leading-tight text-brand-900 sm:text-3xl">
+              {casoGeocontrol.titulo}
+            </h3>
+            <p class="mt-5 max-w-3xl text-base leading-relaxed text-slate-600">
+              {casoGeocontrol.texto}
+            </p>
+          </div>
+          <div class="flex items-center gap-3 border-t border-brand-100 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <span class="h-px w-8 bg-cyan-400 lg:hidden"></span>
+            <div>
+              <p class="spec-label text-slate-500">Referencia</p>
+              <p class="mt-1.5 font-display font-bold text-brand-900">{casoGeocontrol.referencia}</p>
+              <p class="text-sm text-slate-600">{casoGeocontrol.cargo}</p>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
