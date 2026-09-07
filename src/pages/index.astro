@@ -11,6 +11,7 @@ import fotoAgustin from '../assets/testimonios/agustin.png';
 import fotoNatalia from '../assets/testimonios/natalia.png';
 import fotoKatherin from '../assets/testimonios/katherin.png';
 import fotoGeocontrol from '../assets/testimonios/geocontrol.jpg';
+import joseAog from '../assets/jose-aog-2023.jpg';
 
 const cursos = (await getCollection('cursos', ({ data }) => data.publicado))
   .sort((a, b) => a.data.orden - b.data.orden);
@@ -521,86 +522,108 @@ const social = {
   </section>
 
   <!-- ===================== EMPRESAS (B2B) ===================== -->
+  <!-- En mobile la tarjeta navy va a sangre (sin bordes redondeados ni
+       márgenes) y con menos padding: a 400px el texto quedaba encajonado. -->
   <section id="empresas" class="scroll-mt-28 bg-white">
-    <div class="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-      <div class="relative overflow-hidden rounded-3xl bg-brand-950 p-10 text-white sm:p-16">
+    <div class="mx-auto max-w-6xl py-12 sm:px-4 sm:py-24">
+      <div class="relative overflow-hidden bg-brand-950 px-5 py-10 text-white sm:rounded-3xl sm:p-10 lg:p-16">
         <div class="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-cyan-400/10 blur-[120px]"></div>
+
+        <!-- Intro + foto de José en la AOG 2023 (la pasó él para esta sección) -->
+        <div class="relative grid gap-8 lg:grid-cols-[1fr_18rem] lg:items-center lg:gap-14">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="h-px w-10 bg-cyan-400"></span>
+              <p class="text-xs font-semibold uppercase tracking-wider text-cyan-400">Para empresas · B2B</p>
+            </div>
+            <h2 class="mt-5 font-display text-[1.75rem] font-bold leading-tight sm:text-4xl">
+              Formación corporativa a medida
+            </h2>
+            <p class="mt-5 max-w-2xl text-base leading-relaxed text-brand-100 sm:mt-6 sm:text-lg">
+              En Well Solutions Academy diseñamos programas de formación
+              personalizados para empresas de Oil &amp; Gas, adaptados a sus
+              necesidades operativas, perfiles y objetivos. Combinamos experiencia
+              de industria, contenidos técnicos y aprendizaje aplicado para
+              desarrollar capacidades que generen valor real en la operación.
+            </p>
+            <p class="mt-5 font-display text-lg font-bold text-cyan-400 sm:text-2xl">
+              Tu necesidad. Nuestro know-how. Una solución de formación a medida.
+            </p>
+          </div>
+
+          <figure class="corner-ticks relative border border-white/15 bg-brand-900/40 p-2">
+            <div class="relative overflow-hidden">
+              <Image
+                src={joseAog}
+                alt="José Luis Barros en la entrada de la AOG 2023, Buenos Aires"
+                class="aspect-[4/3] w-full object-cover object-[center_28%] sm:aspect-[16/9] lg:aspect-[4/5] lg:object-center"
+                widths={[480, 960]}
+                sizes="(min-width: 1024px) 288px, 100vw"
+                loading="lazy"
+              />
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/50 to-transparent"></div>
+              <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"></div>
+            </div>
+            <figcaption class="spec-label px-1 pt-2 text-brand-100/60">AOG 2023 · Buenos Aires</figcaption>
+          </figure>
+        </div>
+
+        <!-- Modalidades, con foto real de cada una -->
+        <div class="relative mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6">
+          <figure class="overflow-hidden rounded-xl border border-white/15 bg-brand-900/40">
+            <Image
+              src={modalidadPresencial}
+              alt="Capacitación presencial en campo: equipo de Well Solutions frente a un pozo en Neuquén"
+              class="aspect-[16/9] w-full object-cover sm:aspect-[3/2]"
+              widths={[400, 800]}
+              sizes="(min-width: 640px) 400px, 100vw"
+              loading="lazy"
+            />
+            <figcaption class="px-5 py-4">
+              <p class="font-display text-lg font-bold text-white">Presencial</p>
+              <p class="mt-1 text-sm leading-relaxed text-brand-100/90">
+                Capacitación en campo, en tus instalaciones y con tus equipos.
+              </p>
+            </figcaption>
+          </figure>
+
+          <figure class="overflow-hidden rounded-xl border border-white/15 bg-brand-900/40">
+            <Image
+              src={modalidadOnline}
+              alt="Clase online en vivo en el aula virtual de Well Solutions"
+              class="aspect-[16/9] w-full object-cover sm:aspect-[3/2]"
+              widths={[400, 800]}
+              sizes="(min-width: 640px) 400px, 100vw"
+              loading="lazy"
+            />
+            <figcaption class="px-5 py-4">
+              <p class="font-display text-lg font-bold text-white">Online</p>
+              <p class="mt-1 text-sm leading-relaxed text-brand-100/90">
+                Aula virtual con clases en vivo, material y seguimiento del progreso.
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+
         <div class="relative max-w-3xl">
-          <div class="flex items-center gap-3">
-            <span class="h-px w-10 bg-cyan-400"></span>
-            <p class="text-xs font-semibold uppercase tracking-wider text-cyan-400">Para empresas · B2B</p>
-          </div>
-          <h2 class="mt-5 font-display text-3xl font-bold sm:text-4xl">
-            Formación corporativa a medida
-          </h2>
-
-          <p class="mt-6 text-lg leading-relaxed text-brand-100">
-            En Well Solutions Academy diseñamos programas de formación
-            personalizados para empresas de Oil &amp; Gas, adaptados a sus
-            necesidades operativas, perfiles y objetivos. Combinamos experiencia
-            de industria, contenidos técnicos y aprendizaje aplicado para
-            desarrollar capacidades que generen valor real en la operación.
-          </p>
-
-          <!-- Modalidades, con foto real de cada una -->
-          <div class="mt-8 grid gap-6 sm:grid-cols-2">
-            <figure class="overflow-hidden rounded-xl border border-white/15 bg-brand-900/40">
-              <Image
-                src={modalidadPresencial}
-                alt="Capacitación presencial en campo: equipo de Well Solutions frente a un pozo en Neuquén"
-                class="aspect-[3/2] w-full object-cover"
-                widths={[400, 800]}
-                sizes="(min-width: 640px) 400px, 100vw"
-                loading="lazy"
-              />
-              <figcaption class="px-5 py-4">
-                <p class="font-display text-lg font-bold text-white">Presencial</p>
-                <p class="mt-1 text-sm leading-relaxed text-brand-100/90">
-                  Capacitación en campo, en tus instalaciones y con tus equipos.
-                </p>
-              </figcaption>
-            </figure>
-
-            <figure class="overflow-hidden rounded-xl border border-white/15 bg-brand-900/40">
-              <Image
-                src={modalidadOnline}
-                alt="Clase online en vivo en el aula virtual de Well Solutions"
-                class="aspect-[3/2] w-full object-cover"
-                widths={[400, 800]}
-                sizes="(min-width: 640px) 400px, 100vw"
-                loading="lazy"
-              />
-              <figcaption class="px-5 py-4">
-                <p class="font-display text-lg font-bold text-white">Online</p>
-                <p class="mt-1 text-sm leading-relaxed text-brand-100/90">
-                  Aula virtual con clases en vivo, material y seguimiento del progreso.
-                </p>
-              </figcaption>
-            </figure>
-          </div>
-
-          <p class="mt-6 font-display text-xl font-bold text-cyan-400 sm:text-2xl">
-            Tu necesidad. Nuestro know-how. Una solución de formación a medida.
-          </p>
-
-          <p class="mt-8 text-lg text-brand-100">
+          <p class="mt-8 text-base text-brand-100 sm:text-lg">
             Armamos paquetes con los cursos que tu operación necesita, y un
             tablero para seguir el progreso de cada empleado.
           </p>
 
-          <div class="mt-9 flex flex-wrap items-center gap-4">
+          <div class="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
             <a
               href={social.whatsapp}
               target="_blank"
               rel="noopener"
-              class="inline-flex items-center gap-2 rounded-xl bg-cyan-400 px-8 py-4 text-base font-bold text-brand-950 transition hover:bg-cyan-300"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-8 py-4 text-base font-bold text-brand-950 transition hover:bg-cyan-300"
             >
               Consultar por un paquete
               <span>→</span>
             </a>
             <a
               href={`mailto:${social.email}`}
-              class="inline-flex items-center gap-2 px-2 py-4 text-base font-semibold text-brand-100 transition hover:text-cyan-400"
+              class="inline-flex items-center justify-center gap-2 px-2 py-3 text-base font-semibold text-brand-100 transition hover:text-cyan-400 sm:py-4"
             >
               Escribirnos por mail
               <span>→</span>
@@ -608,9 +631,9 @@ const social = {
           </div>
 
           <!-- Contacto directo, para que el B2B no dependa de bajar al footer -->
-          <div class="mt-10 border-t border-white/10 pt-7">
+          <div class="mt-9 border-t border-white/10 pt-7 sm:mt-10">
             <p class="text-xs font-semibold uppercase tracking-wider text-cyan-400">También nos encontrás en</p>
-            <div class="mt-4 flex flex-wrap gap-x-8 gap-y-3 text-base text-brand-100">
+            <div class="mt-4 flex flex-col gap-y-3 text-base text-brand-100 sm:flex-row sm:flex-wrap sm:gap-x-8">
               <a href={social.grupoWhatsapp} target="_blank" rel="noopener" class="inline-flex items-center gap-2 transition hover:text-cyan-400">
                 <span class="text-cyan-400">·</span> Comunidad en WhatsApp
               </a>
