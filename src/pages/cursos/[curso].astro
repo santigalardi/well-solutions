@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { curso } = Astro.props;
-const { titulo, nivel, resumen, temario, duracion, precio } = curso.data;
+const { titulo, tituloSeo, nivel, resumen, temario, duracion, precio } = curso.data;
 const { Content } = await render(curso);
 
 // Acento de color por nivel (coherente con las cards del catálogo).
@@ -58,7 +58,7 @@ const schemaCurso = {
 };
 ---
 
-<Base title={`${titulo} · Well Solutions`} description={resumen} schema={schemaCurso}>
+<Base title={`${tituloSeo ?? titulo} · Well Solutions`} description={resumen} schema={schemaCurso}>
   <!-- Cabecera navy del curso -->
   <section class="relative overflow-hidden bg-brand-950 text-white">
     <div class="absolute -left-32 top-0 h-96 w-96 rounded-full bg-brand-500/20 blur-[130px]"></div>

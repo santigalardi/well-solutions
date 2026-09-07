@@ -1,5 +1,6 @@
 ---
 titulo: Instalaciones de Superficie y Facilidades de Producción
+tituloSeo: Instalaciones de Superficie y Facilidades
 nivel: basico-medio
 resumen: >-
   La infraestructura que conecta el pozo con la planta: satélites, baterías,

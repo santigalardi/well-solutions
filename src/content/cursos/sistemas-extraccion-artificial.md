@@ -1,5 +1,6 @@
 ---
 titulo: Artificial Lift · Sistemas de Levantamiento Artificial
+tituloSeo: Artificial Lift · Levantamiento Artificial
 nivel: basico-medio
 resumen: >-
   Aprendé los fundamentos del Artificial Lift y las principales tecnologías

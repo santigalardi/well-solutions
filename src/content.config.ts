@@ -14,6 +14,9 @@ const cursos = defineCollection({
   schema: ({ image }) =>
     z.object({
       titulo: z.string(),
+      // Título corto para la etiqueta <title> (SEO: <60 caracteres con el
+      // sufijo "· Well Solutions"). Si falta, se usa `titulo`.
+      tituloSeo: z.string().optional(),
       // Nivel dentro de la academia (etiquetas de la lista oficial de José).
       nivel: z.enum(['basico-medio', 'medio-avanzado', 'avanzado']),
       // Resumen corto para las cards del catálogo.
