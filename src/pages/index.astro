@@ -670,8 +670,8 @@ const social = {
         {testimonios.map((t) => (
           <figure class="relative flex flex-col overflow-hidden rounded-2xl border border-brand-200 bg-white shadow-blueprint">
             <!-- Círculo de fondo y puntos, como en las láminas -->
-            <div class="pointer-events-none absolute -right-20 top-10 h-80 w-80 rounded-full bg-brand-50 sm:-right-16 sm:h-96 sm:w-96"></div>
-            <div class="pointer-events-none absolute bottom-28 left-8 h-14 w-24 bg-[radial-gradient(circle,rgba(11,42,74,0.22)_1.5px,transparent_1.5px)] bg-[size:12px_12px]"></div>
+            <div class="pointer-events-none absolute -right-16 bottom-20 h-64 w-64 rounded-full bg-brand-50 sm:bottom-auto sm:top-10 sm:h-96 sm:w-96"></div>
+            <div class="pointer-events-none absolute bottom-24 left-8 h-14 w-24 bg-[radial-gradient(circle,rgba(11,42,74,0.22)_1.5px,transparent_1.5px)] bg-[size:12px_12px]"></div>
 
             <blockquote class="relative px-7 pt-8 sm:px-9 sm:pt-10">
               <svg viewBox="0 0 32 32" fill="currentColor" class="h-10 w-10 rotate-180 text-brand-500 sm:h-12 sm:w-12" aria-hidden="true">
@@ -680,7 +680,7 @@ const social = {
               <p class="mt-4 font-display text-xl font-bold leading-snug text-brand-900 sm:text-2xl">
                 {t.cita}
               </p>
-              <p class="mt-6 min-h-48 max-w-[52%] pb-6 text-base leading-relaxed text-slate-600 sm:min-h-56 sm:max-w-[50%] sm:text-lg">
+              <p class="mt-5 pb-2 text-base leading-relaxed text-slate-600 sm:mt-6 sm:min-h-56 sm:max-w-[50%] sm:pb-6 sm:text-lg">
                 {t.detalle}
               </p>
             </blockquote>
@@ -689,13 +689,13 @@ const social = {
             <Image
               src={t.foto}
               alt={`Foto de ${t.nombre}`}
-              class="pointer-events-none absolute bottom-0 right-0 z-10 h-64 w-auto sm:h-[20rem]"
+              class="pointer-events-none relative z-10 ml-auto mr-4 mt-2 block h-52 w-auto sm:absolute sm:bottom-0 sm:right-0 sm:ml-0 sm:mr-0 sm:mt-0 sm:h-[20rem]"
               widths={[360, 720]}
-              sizes="(min-width: 640px) 320px, 256px"
+              sizes="(min-width: 640px) 320px, 208px"
               loading="lazy"
             />
 
-            <figcaption class="relative mt-auto bg-brand-950 px-7 py-5 pr-[50%] text-white sm:px-9 sm:pr-[52%]">
+            <figcaption class="relative mt-auto bg-brand-950 px-7 py-5 text-white sm:px-9 sm:pr-[52%]">
               <p class="font-display text-lg font-bold leading-tight sm:text-xl">{t.nombre}</p>
               <p class="mt-1 text-sm leading-snug text-brand-100">{t.cargo}</p>
               {t.extra && (
