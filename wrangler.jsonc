@@ -13,6 +13,15 @@
   "observability": {
     "enabled": true
   },
+  // Pagos ya reenviados a Make, para no registrar dos veces la misma venta.
+  // MP reintenta notificaciones viejas (hasta semanas después) y manda
+  // varias por pago; sin esto, cada reintento genera una fila y dos mails.
+  "kv_namespaces": [
+    {
+      "binding": "PAGOS_PROCESADOS",
+      "id": "2c76c20902c84d7c93917213cd53203d"
+    }
+  ],
   // Dominios del sitio. El singular (wellsolution.com.ar) redirige acá
   // vía Redirect Rule en su zona; www vía regla WWW→root en esta zona.
   "routes": [

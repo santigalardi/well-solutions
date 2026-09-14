@@ -52,6 +52,17 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return new Response('ok', { status: 200 });
   }
 
+  // Si ya procesamos este pago, cortamos acá: ni consultamos a MP.
+  // MP manda varias notificaciones por pago (payment.created,
+  // payment.updated) y reintenta las que considera fallidas, incluso
+  // semanas después — en sept/2026 revivió pagos de prueba de agosto y
+  // los registró como ventas nuevas.
+  const pagos = env.PAGOS_PROCESADOS as KVNamespace | undefined;
+  const clave = `pago:${paymentId}`;
+  if (pagos && (await pagos.get(clave))) {
+    return new Response('duplicado', { status: 200 });
+  }
+
   // Confirmamos el pago consultando a MP (no confiamos en el payload crudo).
   const res = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
@@ -81,11 +92,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
     };
 
     if (makeWebhookUrl) {
-      await fetch(makeWebhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(contacto),
-      }).catch((e) => console.error('Error enviando a Make:', e));
+      // Sólo marcamos el pago como procesado si Make lo recibió bien. Si
+      // falla, no guardamos nada: así el próximo reintento de MP (que
+      // antes era el problema) sirve para recuperar la venta perdida.
+      try {
+        const envio = await fetch(makeWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(contacto),
+        });
+        if (envio.ok) {
+          await pagos?.put(
+            clave,
+            JSON.stringify({ fecha: pago.date_approved, enviado: new Date().toISOString() }),
+          );
+        } else {
+          console.error('Make rechazó la venta:', pago.id, envio.status);
+        }
+      } catch (e) {
+        console.error('Error enviando a Make:', e);
+      }
     } else {
       // Sin Make configurado todavía: al menos lo dejamos en logs.
       console.log('Pago aprobado (Make no configurado):', contacto);
