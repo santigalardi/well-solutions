@@ -18,7 +18,7 @@ temario:
   - Análisis integral de producción
 duracion: A tu ritmo · online
 precio:
-  ars: 95000
+  ars: 90000
   usd: 60
 orden: 1
 publicado: false
