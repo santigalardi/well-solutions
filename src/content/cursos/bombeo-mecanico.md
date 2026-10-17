@@ -17,7 +17,7 @@ temario:
   - Resolución de problemas
 duracion: A tu ritmo · online
 precio:
-  ars: 140000
+  ars: 145000
   usd: 93
 orden: 2
 publicado: false
