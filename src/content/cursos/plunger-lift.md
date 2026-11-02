@@ -17,7 +17,7 @@ temario:
   - Optimizaciones e IA aplicada a ALS
 duracion: A tu ritmo · online
 precio:
-  ars: 180000
+  ars: 190000
   usd: 120
 orden: 4
 publicado: false
