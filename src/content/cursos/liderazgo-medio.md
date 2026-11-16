@@ -17,7 +17,7 @@ temario:
   - Liderazgo para la excelencia operacional
 duracion: A tu ritmo · online
 precio:
-  ars: 155000
+  ars: 160000
   usd: 100
 orden: 10
 publicado: true
