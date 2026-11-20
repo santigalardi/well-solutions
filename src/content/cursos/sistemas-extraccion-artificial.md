@@ -19,7 +19,7 @@ temario:
   - Estrategia de explotación
 duracion: A tu ritmo · online
 precio:
-  ars: 200000
+  ars: 210000
   usd: 130
 orden: 3
 publicado: true

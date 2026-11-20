@@ -18,7 +18,7 @@ temario:
   - Desempeño, auditoría y mejora continua
 duracion: A tu ritmo · online
 precio:
-  ars: 215000
+  ars: 225000
   usd: 140
 orden: 9
 publicado: true
