@@ -17,7 +17,7 @@ temario:
   - Análisis nodal
 duracion: A tu ritmo · online
 precio:
-  ars: 170000
+  ars: 180000
   usd: 110
 orden: 7
 publicado: true

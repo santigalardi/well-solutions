@@ -17,7 +17,7 @@ temario:
   - Servicios
 duracion: A tu ritmo · online
 precio:
-  ars: 170000
+  ars: 180000
   usd: 110
 orden: 5
 publicado: true
