@@ -17,7 +17,7 @@ temario:
   - Terminación
 duracion: A tu ritmo · online
 precio:
-  ars: 160000
+  ars: 165000
   usd: 100
 orden: 1
 publicado: true
